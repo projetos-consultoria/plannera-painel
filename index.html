@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silvia — Painel de Projeto · Plannera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --bg:       #f4f6fa;
+  --white:    #ffffff;
+  --border:   #e4e7f0;
+  --borderl:  #eef0f6;
+  --txt:      #1a1d2e;
+  --txt2:     #545878;
+  --txt3:     #9ba3bf;
+  --navy:     #2D3558;
+  --navyl:    #3a4570;
+  --orange:   #f7941e;
+  --obg:      rgba(247,148,30,0.10);
+  --obd:      rgba(247,148,30,0.28);
+  --teal:     #2ba09d;
+  --tbg:      rgba(43,160,157,0.09);
+  --tbd:      rgba(43,160,157,0.22);
+  --blue:     #3a4c8a;
+  --bbg:      rgba(58,76,138,0.09);
+  --bbd:      rgba(58,76,138,0.22);
+  --red:      #d85d4b;
+  --grey:     #5C5B5B;
+  --purple:   #7c5cbf;
+  --pbg:      rgba(124,92,191,0.09);
+  --pbd:      rgba(124,92,191,0.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-height:100vh;color:var(--txt);}
+
+/* ── Top bar ── */
+.topbar{background:var(--navy);padding:0 28px;display:flex;align-items:center;gap:18px;height:56px;position:sticky;top:0;z-index:50;box-shadow:0 1px 0 rgba(0,0,0,.15),0 2px 12px rgba(0,0,0,.12);}
+.logo{font-size:19px;font-weight:700;letter-spacing:3.5px;color:#fff;text-transform:uppercase;}
+.logo em{color:var(--orange);font-style:normal;}
+.tb-sep{width:1px;height:20px;background:rgba(255,255,255,.15);}
+.tb-label{font-size:11px;color:rgba(255,255,255,.38);letter-spacing:1.5px;text-transform:uppercase;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal);animation:pa 2.5s ease-in-out infinite;}
+@keyframes pa{0%,100%{opacity:1}50%{opacity:.35}}
+.tb-status{font-size:11px;color:var(--teal);font-weight:600;letter-spacing:1px;}
+
+/* ── Tabs ── */
+.tabs{display:flex;padding:0 24px;background:var(--white);border-bottom:1px solid var(--border);gap:0;overflow-x:auto;}
+.tab{display:flex;align-items:center;gap:7px;padding:12px 16px;font-size:12px;font-weight:500;font-family:'Outfit',sans-serif;color:var(--txt3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .15s,border-color .15s;white-space:nowrap;margin-bottom:-1px;flex-shrink:0;}
+.tab:hover:not(.locked){color:var(--txt2);}
+.tab.active{color:var(--orange);border-bottom-color:var(--orange);font-weight:600;}
+.tab.locked{opacity:.45;cursor:pointer;transition:opacity .15s,color .15s,border-color .15s;}
+.tab.locked:hover{opacity:.7;}
+.tdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+
+/* ── Stats strip ── */
+.stats{display:flex;align-items:stretch;background:var(--white);border-bottom:1px solid var(--border);}
+.stats-left{display:flex;align-items:stretch;flex-shrink:0;border-right:2px solid var(--border);}
+.stat{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:8px 16px;border-right:1px solid var(--borderl);gap:1px;text-align:center;flex:1;}
+.stat.stat-prog-wrap{flex:1;border-left:none;border-right:none;}
+.stat-top{display:flex;align-items:center;gap:6px;}
+.stat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.sn{font-size:24px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.5px;}
+.sn.o{color:var(--orange);}
+.sn.b{color:var(--blue);}
+.sn.t{color:var(--teal);}
+.sl{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.6px;margin-top:0;}
+.stat-prog{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:100%;padding:0 28px;}
+.prog-row{display:flex;align-items:baseline;gap:4px;justify-content:center;}
+.prog-num{font-size:20px;font-weight:700;color:var(--txt);letter-spacing:-.5px;font-family:'JetBrains Mono',monospace;}
+.prog-total{font-size:12px;color:var(--txt3);font-family:'JetBrains Mono',monospace;}
+.pbar{height:3px;background:var(--borderl);border-radius:2px;overflow:hidden;width:100%;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--blue),var(--orange));border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;}
+
+/* ── Pacote filter bar ── */
+.filter-bar{
+  display:flex;align-items:center;gap:12px;
+  padding:8px 28px;
+  background:var(--white);
+  border-bottom:2px solid var(--border);
+}
+.filt-label{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--txt3);text-transform:uppercase;}
+.filt-seg{display:flex;gap:0;border:1.5px solid var(--border);border-radius:20px;overflow:hidden;}
+.filt-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 14px;
+  font-size:11px;font-weight:600;font-family:'Outfit',sans-serif;
+  color:var(--txt2);background:transparent;border:none;
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+  border-right:1px solid var(--borderl);
+}
+.filt-btn:last-child{border-right:none;}
+.filt-btn:hover{background:var(--bg);}
+.filt-btn.active{background:var(--navy);color:#fff;}
+.filt-btn.active.pura{background:var(--blue);}
+.filt-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.pk-tag{
+  display:inline-flex;align-items:center;
+  font-size:9px;font-weight:700;letter-spacing:.5px;
+  padding:2px 6px;border-radius:10px;margin-left:6px;
+  background:var(--bbg);color:var(--blue);border:1px solid var(--bbd);
+  white-space:nowrap;
+}
+
+/* ── Content ── */
+.content{padding:0 0 60px;}
+
+/* ── Phase section ── */
+.phase-sec{border-bottom:1px solid var(--border);}
+.phase-sec:last-child{border-bottom:none;}
+.ph-hdr{display:flex;align-items:center;gap:12px;padding:14px 28px;cursor:pointer;user-select:none;background:var(--white);border-bottom:1px solid var(--borderl);transition:background .12s;position:sticky;top:56px;z-index:30;}
+.ph-hdr:hover{background:#fafbfc;}
+.ph-bar{width:4px;height:22px;border-radius:2px;flex-shrink:0;}
+.ph-title{font-size:13px;font-weight:600;color:var(--txt);flex:1;}
+.ph-pills{display:flex;gap:6px;}
+.pill{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;letter-spacing:.3px;}
+.pill-t{background:var(--borderl);color:var(--txt3);}
+.pill-n{background:var(--obg);color:var(--orange);}
+.pill-c{background:var(--bbg);color:var(--blue);}
+.pill-i{background:var(--tbg);color:var(--teal);}
+.ph-chv{color:var(--txt3);flex-shrink:0;transition:transform .22s ease;}
+.ph-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s cubic-bezier(.4,0,.2,1);}
+.ph-body.open{grid-template-rows:1fr;}
+.ph-inner{overflow:hidden;background:var(--bg);}
+
+/* ── Deliverable group ── */
+.dg{padding:0;}
+.dg-hdr{display:flex;align-items:center;padding:7px 28px 7px 32px;font-size:11px;font-weight:700;color:var(--txt2);letter-spacing:.5px;text-transform:uppercase;border-left:3px solid transparent;background:var(--white);border-bottom:1px solid var(--borderl);border-top:1px solid var(--borderl);margin-top:2px;}
+
+/* ── Table header ── */
+.tbl-head{display:grid;grid-template-columns:38px 64px minmax(0,1.2fr) 118px minmax(0,2fr) 80px 110px;gap:0;padding:7px 28px;background:#edf0f7;border-bottom:2px solid var(--border);font-size:10px;font-weight:700;color:var(--txt2);letter-spacing:.8px;text-transform:uppercase;}
+.th{display:flex;align-items:center;}
+
+/* ── Activity row ── */
+.act-row{display:grid;grid-template-columns:38px 64px minmax(0,1.2fr) 118px minmax(0,2fr) 80px 110px;gap:0;padding:0 28px;align-items:center;border-bottom:1px solid var(--borderl);background:var(--white);cursor:default;min-height:44px;transition:background .1s;}
+.act-row:hover{background:#f8f9fd;}
+.act-row.nera-row{background:#fffcf8;}
+.act-row.nera-row:hover{background:#fff6ec;}
+.act-row.done-row{background:var(--bg)!important;}
+.act-row.done-row .act-name,.act-row.done-row .act-id{opacity:.3;text-decoration:line-through;}
+.act-row.done-row .act-desc{opacity:.2;}
+.act-row.hidden-row{display:none;}
+
+/* cells */
+.cell-chk{display:flex;align-items:center;justify-content:center;padding:10px 0;}
+.cell-id{display:flex;align-items:center;padding:10px 8px 10px 0;}
+.cell-name{display:flex;align-items:center;padding:10px 12px 10px 0;flex-wrap:wrap;gap:4px;}
+.cell-rec{display:flex;align-items:center;padding:10px 12px 10px 0;}
+.cell-desc{display:flex;align-items:center;padding:10px 12px 10px 0;overflow:hidden;}
+.cell-act{display:flex;align-items:center;justify-content:flex-end;padding:10px 0;}
+.cell-hrs{display:flex;align-items:center;justify-content:center;padding:10px 0;font-size:12px;color:var(--txt3);font-family:'JetBrains Mono',monospace;}
+.hrs-empty{width:28px;height:1px;background:var(--borderl);}
+
+/* checkbox */
+.chk{width:16px;height:16px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;color:transparent;background:var(--white);}
+.chk:hover{border-color:var(--orange);}
+.chk.done{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+/* act id */
+.act-id{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--txt3);}
+
+/* act name */
+.act-name{font-size:13px;color:var(--txt);line-height:1.4;font-weight:400;}
+.act-name.nera{color:#c97000;font-weight:500;}
+
+/* description */
+.act-desc{font-size:12px;color:var(--txt3);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-style:italic;max-width:100%;}
+
+/* ── Resource badges ── */
+.rbadge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+.rb-n{background:var(--orange);color:#fff;box-shadow:0 1px 4px rgba(247,148,30,.3);}
+.rb-c{background:var(--bbg);color:var(--blue);border:1px solid var(--bbd);}
+.rb-i{background:var(--tbg);color:var(--teal);border:1px solid var(--tbd);}
+.rb-ci{background:rgba(90,80,140,.07);color:var(--grey);border:1px solid rgba(90,80,140,.15);}
+
+/* ── Ativar button ── */
+.btn-ativar{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;font-family:'Outfit',sans-serif;color:var(--orange);background:var(--obg);border:1px solid var(--obd);padding:5px 11px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.btn-ativar:hover{background:var(--orange);border-color:var(--orange);color:#fff;}
+.btn-ativar:disabled{opacity:.25;cursor:default;pointer-events:none;}
+
+/* ── Drawer ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100;opacity:0;pointer-events:none;transition:opacity .22s;backdrop-filter:blur(2px);}
+.overlay.open{opacity:1;pointer-events:all;}
+.drawer{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);border-radius:18px 18px 0 0;z-index:101;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);max-height:78vh;overflow-y:auto;box-shadow:0 -8px 40px rgba(0,0,0,.12);}
+.drawer.open{transform:translateY(0);}
+.grip{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;}
+.dbody{padding:22px 36px 40px;max-width:800px;margin:0 auto;}
+.d-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--orange);background:var(--obg);border:1px solid var(--obd);padding:3px 10px;border-radius:20px;margin-bottom:14px;}
+.d-title{font-size:18px;font-weight:600;color:var(--txt);margin-bottom:4px;}
+.d-id{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt3);margin-bottom:18px;}
+.d-instr{font-size:13px;color:var(--txt2);line-height:1.65;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:8px;margin-bottom:20px;}
+.d-plbl{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--txt3);text-transform:uppercase;margin-bottom:8px;}
+.d-prompt{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt2);line-height:1.75;white-space:pre-wrap;margin-bottom:20px;max-height:150px;overflow-y:auto;}
+.d-acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.btn-pr{display:flex;align-items:center;gap:7px;padding:10px 20px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;transition:background .15s;}
+.btn-pr:hover{background:#e0830d;}
+.btn-se{display:flex;align-items:center;gap:7px;padding:10px 16px;background:transparent;color:var(--txt2);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;font-family:'Outfit',sans-serif;cursor:pointer;text-decoration:none;transition:background .15s;}
+.btn-se:hover{background:var(--bg);}
+.cpok{font-size:12px;color:var(--teal);font-weight:500;display:none;align-items:center;gap:5px;}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="logo">SIL<em>VIA</em></div>
+  <div class="tb-sep"></div>
+  <div class="tb-label">Projetos de Consultoria</div>
+  <div class="tb-right">
+    <div class="pulse"></div>
+    <div class="tb-status">ATIVO</div>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs" id="tabs-root"></div>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stats-left" id="stats-left">
+    <div class="stat">
+      <div class="stat-top"><div class="stat-dot" style="background:var(--navy)"></div><div class="sn" id="cnt-total">—</div></div>
+      <div class="sl">Atividades</div>
+    </div>
+    <div class="stat">
+      <div class="stat-top"><div class="stat-dot" style="background:var(--orange)"></div><div class="sn o" id="cnt-n">—</div></div>
+      <div class="sl">Silvia</div>
+    </div>
+    <div class="stat">
+      <div class="stat-top"><div class="stat-dot" style="background:var(--blue)"></div><div class="sn b" id="cnt-c">—</div></div>
+      <div class="sl">Consultoria</div>
+    </div>
+    <div class="stat" style="border-right:none;">
+      <div class="stat-top"><div class="stat-dot" style="background:var(--teal)"></div><div class="sn t" id="cnt-i">—</div></div>
+      <div class="sl">Implantação</div>
+    </div>
+  </div>
+  <div class="stat stat-prog-wrap">
+    <div class="stat-prog">
+      <div class="prog-row">
+        <span class="prog-num" id="prog-n">0</span>
+        <span class="prog-total" id="prog-total">/0</span>
+        <span class="sl" style="margin-top:0">concluídas</span>
+      </div>
+      <div class="pbar"><div class="pfill" id="pfill"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter bar -->
+<div class="filter-bar">
+  <span class="filt-label">Pacote</span>
+  <div class="filt-seg">
+    <button class="filt-btn active" id="filt-all" onclick="setPacote('all')">
+      <div class="filt-dot" style="background:var(--navy)"></div> Implantação Consultiva
+    </button>
+    <button class="filt-btn pura" id="filt-pura" onclick="setPacote('pura')">
+      <div class="filt-dot" style="background:var(--blue)"></div> Implantação Pura
+    </button>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="content" id="phases-root"></div>
+
+<!-- Drawer -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="grip"></div>
+  <div class="dbody" id="drawer-body"></div>
+</div>
+
+<script>
+// ── Skills config ─────────────────────────────────────────────────────────────
+const SKILLS = {
+  vd:'Validação de Dados', ad:'Análise de Demanda',
+  dp:'Diagnóstico de Processo', cm:'Construção de Materiais', gp:'Governança de Projeto'
+};
+const PROMPTS = {
+  vd:'Envie a base de dados do cliente (Excel ou CSV) para que eu possa iniciar a validação.',
+  ad:'Envie a base histórica de demanda com as colunas: SKU, Período, Volume Realizado e Plano (quando disponível).',
+  dp:'Envie as notas ou resumo das entrevistas realizadas com as áreas envolvidas no processo.',
+  cm:'Envie os dados, análises e insumos já produzidos que devem embasar o material.',
+  gp:'Envie as informações do projeto: nome do cliente, escopo, datas previstas e lista de participantes.'
+};
+
+// ── Tabs config ───────────────────────────────────────────────────────────────
+const TABS = [
+  {id:'essential',   label:'S&OP Essential',           color:'#f7941e', active:true},
+  {id:'professional',label:'S&OP Professional',        color:'#2ba09d', active:true},
+  {id:'diag',        label:'Diagnóstico S&OP e S&OE',  color:'#3a4c8a', active:false},
+  {id:'advanced',    label:'S&OP Advanced',            color:'#7c5cbf', active:false},
+  {id:'minidiag',    label:'Mini Diagnóstico',         color:'#d85d4b', active:false},
+  {id:'maturidade',  label:'Avaliação de Maturidade',  color:'#5C5B5B', active:false},
+  {id:'soe',         label:'S&OE e Abast.',            color:'#e07b39', active:false},
+  {id:'politica',    label:'Política de Estoques',     color:'#2ba09d', active:false},
+  {id:'dash',        label:'Dashboards',               color:'#3a4c8a', active:false},
+];
+
+// ── Phases per project ─────────────────────────────────────────────────────────
+const PHASES = {
+  essential: [
+    {id:0,name:'Pré Projeto',   color:'#2ba09d'},
+    {id:1,name:'Mapeamento',    color:'#3a4c8a'},
+    {id:2,name:'Construção',    color:'#f7941e'},
+    {id:3,name:'Operação',      color:'#d85d4b'},
+  ],
+  professional: [
+    {id:0,name:'Pré Projeto',          color:'#2ba09d'},
+    {id:1,name:'Mapeamento Demanda',   color:'#3a4c8a'},
+    {id:2,name:'Construção Demanda',   color:'#f7941e'},
+    {id:3,name:'Operação Demanda',     color:'#d85d4b'},
+    {id:4,name:'Mapeamento Estoques',  color:'#7c5cbf'},
+    {id:5,name:'Construção Estoques',  color:'#e07b39'},
+    {id:6,name:'Operação Estoques',    color:'#5C5B5B'},
+  ]
+};
+
+// ── Data ──────────────────────────────────────────────────────────────────────
+// [phase_id, 'Group', [[id, name, rc(n/c/i/ci), desc, skill|null, pacote(b/c)], ...]]
+// pacote: 'b' = Consultiva + Pura, 'c' = apenas Consultiva
+const ALL_DATA = {
+  essential: [
+    [0,'0.1. Governança do Projeto',[
+      ['0.1.1','Handover de vendas para consultoria','c','Alinhar internamente escopo, parametrizações e contexto do cliente',null,'b'],
+      ['0.1.2','Material do Pré Kick-Off','n','Montar o material de Pré Kick Off','gp','b'],
+      ['0.1.3','Validar o material','c','Ajustar e validar o material de Pré Kick Off',null,'b'],
+      ['0.1.4','Reunião de Pré Kick-Off','c','Conduzir a reunião de Pré Kick Off com o cliente',null,'b'],
+      ['0.1.5','Agendar checkpoints periódicos','c','Agendar agendas com o cliente para tirar dúvidas sobre dados',null,'b'],
+    ]],
+    [0,'0.2. Validação dos Dados — Sell In',[
+      ['0.2.1','Enviar requisição de dados de Sell In','c','Enviar arquivo de requisição ao ponto focal antes do Pré Kick Off',null,'b'],
+      ['0.2.2','Resolver pendências de Sell In','n','Identificar quais bases não foram enviadas','vd','b'],
+      ['0.2.3','Verificar grandes números de Sell In','n','Fazer validação geral dos grandes números enviados','vd','b'],
+      ['0.2.4','Verificar inconsistências de cadastros de Sell In','n','Analisar cadastro de clientes, produtos e histórico de faturamento','vd','b'],
+      ['0.3.6','Go ahead para Kick Off','c','Marco de aprovação das bases e principais definições do projeto',null,'b'],
+      ['0.3.7','Material do Kick Off','n','Montar o material do Kick Off','cm','b'],
+      ['0.3.8','Reunião de Kick Off','c','Conduzir a reunião de Kick Off com o cliente',null,'b'],
+    ]],
+    [1,'1.1. Diagnóstico do Planejamento de Demanda',[
+      ['1.1.1','Entender parâmetros atuais de processo','c','Horizonte, Lag, Granularidades',null,'c'],
+      ['1.1.2','Entrevistas com Planejamento','c','Realizar entrevistas com área de Planejamento',null,'c'],
+      ['1.1.3','Entrevistas com Comercial/Marketing','c','Realizar entrevistas com Comercial e Marketing',null,'c'],
+      ['1.1.4','Entrevistas com DRP/MPS','c','Realizar entrevistas com a área de DRP/MPS',null,'c'],
+      ['1.1.5','Entrevistas com MRP/Compras','c','Realizar entrevistas com a área de Compras',null,'c'],
+      ['1.1.6','Entrevistas com Financeiro','c','Entender participação e análises realizadas pelo Financeiro',null,'c'],
+      ['1.1.7','Entrevistas com as Diretorias','c','Realizar entrevistas executivas com a Diretoria',null,'c'],
+      ['1.1.8','Consolidar entrevistas e reuniões','n','Consolidar todas as informações captadas nas entrevistas','dp','c'],
+      ['1.1.9','Validar Macro Processo de Demanda','c','Validar fluxo macro do processo de demanda com o cliente',null,'c'],
+    ]],
+    [1,'1.2. Análise da Demanda',[
+      ['1.2.1','Demanda por diversos recortes — Sell In','n','Análises automatizadas com ajustes conforme especificidades do cliente','ad','c'],
+      ['1.2.2','Pareto de produto e clientes','n','Análises de concentração de demanda por produto e cliente','ad','c'],
+      ['1.2.3','Sazonalidade','n','Análise de sazonalidade histórica','ad','c'],
+      ['1.2.4','Lançamentos e Descontinuações','n','Análise de impacto de novos produtos e descontinuações','ad','c'],
+      ['1.2.5','Montar material de análises','n','Montar material consolidado com todas as análises de demanda','cm','c'],
+    ]],
+    [1,'1.3. Caso Base de Demanda',[
+      ['1.3.1','Entender métrica atual de cálculo','c','Mapear junto ao cliente o modo de cálculo do FA e diferenças com nossa metodologia',null,'c'],
+      ['1.3.2','Analisar 12 meses de planos passados','c','Entender lag do plano, nível de mensuração e premissas usadas',null,'c'],
+      ['1.3.3','Calcular FA e Bias para o período','n','Calcular com nossa metodologia FA, Bias, WMAPE. FVA quando possível.','ad','c'],
+    ]],
+    [1,'1.5. Assistência na Especificação',[
+      ['1.5.1','Detalhar parâmetros para especificação da ferramenta','i','Preencher o formulário de implantação da ferramenta — Demanda',null,'b'],
+      ['1.5.2','Validar especificação dos parâmetros técnicos','i','Validar com o cliente a especificação da ferramenta',null,'b'],
+      ['1.5.3','Definir usuários e escopo da ferramenta','i','Definir lista de usuários e escopo de acesso',null,'b'],
+    ]],
+    [2,'2.1. Implantação do Plannera S&OP Demanda',[
+      ['2.1.1','Preparação de dados históricos','n','Preparar dados para carga antes da disponibilização do Plannera Demand','vd','b'],
+      ['2.1.2','Carga de Planos Passados','i','Subir os planos passados na ferramenta',null,'b'],
+      ['2.1.3','Carga de Dados','i','Cadastro de blocos, itens e séries de previsão',null,'b'],
+    ]],
+    [2,'2.2. Simulação da Estatística',[
+      ['2.2.1','Simular previsões estatísticas em diversos níveis de agregação','i','Rodar previsões em backtest no período de controle',null,'b'],
+      ['2.2.2','Definição de Nível de Série de Previsão','c','Apresentar resultados e sugerir nível ganhador ao cliente',null,'b'],
+      ['2.2.3','Comparar Simulação da Estatística e Caso Base','n','Comparar resultado da estatística com o caso base do cliente','ad','c'],
+    ]],
+    [2,'2.3. Análise e Tratamento de Outliers',[
+      ['2.3.1','Detecção de Outliers no nível Série de Previsão','n','Detectar outliers no histórico de demanda','ad','c'],
+      ['2.3.2','Tratamento de Outliers','n','Validar com o cliente a opção de tratamento dentro das sugestões','ad','c'],
+      ['2.3.3','Simular Previsões Estatísticas pós tratamento','i','Rodar nova simulação após o tratamento dos outliers',null,'c'],
+      ['2.3.4','Montar nova matriz ABC-XYZ','n','Análise da matriz ABC-XYZ pós tratamento de outliers','ad','c'],
+    ]],
+    [2,'2.4. Avaliação de Maturidade S&OP',[
+      ['2.4.1','Aplicar a Avaliação de Maturidade do S&OP','c','Conduzir o questionário de maturidade com o cliente',null,'c'],
+      ['2.4.2','Montar insights de maturidade','n','Consolidar resultados e insights da avaliação de maturidade','cm','c'],
+    ]],
+    [2,'2.5. Go Live Plannera S&OP Demanda',[
+      ['2.5.1','Go Live do módulo de Demanda','c','Marco de go live do módulo de Demanda no Plannera S&OP',null,'b'],
+    ]],
+    [3,'3.1. Operação Assistida Demanda',[
+      ['3.1.1','Sessão Prática Time de Planejamento','i','Treinamento geral com stakeholder e key user da ferramenta',null,'b'],
+      ['3.1.2','Sessão Prática: Temas Complementares','i','Explorar análises avançadas e uso de dashboards na ferramenta',null,'b'],
+      ['3.2.3','Sessão Prática dos usuários de colaboração','i','Escopo reduzido de explicação para usuários colaboradores',null,'b'],
+      ['3.2.4','Handover para CS','ci','Passagem de bastão para área de Customer Success',null,'b'],
+    ]],
+  ],
+
+  professional: [
+    [0,'0.1. Governança do Projeto',[
+      ['0.1.1','Handover de vendas para consultoria','c','Alinhar internamente escopo, parametrizações e contexto do cliente',null,'b'],
+      ['0.1.2','Material do Pré Kick-Off','n','Montar o material de Pré Kick Off','gp','b'],
+      ['0.1.3','Validar o material','c','Ajustar e validar o material de Pré Kick Off',null,'b'],
+      ['0.1.4','Reunião de Pré Kick-Off','c','Conduzir a reunião de Pré Kick Off com o cliente',null,'b'],
+      ['0.1.5','Agendar checkpoints periódicos','c','Agendar agendas com o cliente para tirar dúvidas sobre dados',null,'b'],
+    ]],
+    [0,'0.2. Validação dos Dados — Sell In',[
+      ['0.2.1','Enviar requisição de dados de Sell In','c','Enviar arquivo de requisição ao ponto focal antes do Pré Kick Off',null,'b'],
+      ['0.2.2','Resolver pendências de Sell In','n','Identificar quais bases não foram enviadas','vd','b'],
+      ['0.2.3','Verificar grandes números de Sell In','n','Fazer validação geral dos grandes números enviados','vd','b'],
+      ['0.2.4','Verificar inconsistências de cadastros de Sell In','n','Analisar cadastro de clientes, produtos e histórico de faturamento','vd','b'],
+    ]],
+    [0,'0.3. Validação dos Dados — Sell Out',[
+      ['0.3.1','Enviar requisição de dados de Sell Out','c','Enviar arquivo de requisição de dados de Sell Out ao ponto focal',null,'b'],
+      ['0.3.2','Verificar inconsistências de cadastros de Sell Out','n','Analisar cadastros dos dados de Sell Out','vd','b'],
+      ['0.3.3','Verificar grandes números de Sell Out','n','Fazer validação geral dos grandes números de Sell Out','vd','b'],
+      ['0.3.4','Resolver pendências de Sell Out','n','Identificar e resolver pendências dos dados de Sell Out','vd','b'],
+      ['0.3.5','Crosscheck Sell In vs Sell Out','n','Cruzar as bases de Sell In e Sell Out para identificar divergências','vd','b'],
+      ['0.3.6','Go ahead para Kick Off','c','Marco de aprovação das bases e principais definições do projeto',null,'b'],
+      ['0.3.7','Material do Kick Off','n','Montar o material do Kick Off','cm','b'],
+      ['0.3.8','Reunião de Kick Off','c','Conduzir a reunião de Kick Off com o cliente',null,'b'],
+    ]],
+    [1,'1.1. Diagnóstico do Planejamento de Demanda',[
+      ['1.1.1','Entender parâmetros atuais de processo','c','Horizonte, Lag, Granularidades',null,'c'],
+      ['1.1.2','Entrevistas com Planejamento','c','Realizar entrevistas com área de Planejamento',null,'c'],
+      ['1.1.3','Entrevistas com Comercial/Marketing','c','Realizar entrevistas com Comercial e Marketing',null,'c'],
+      ['1.1.4','Entrevistas com DRP/MPS','c','Realizar entrevistas com a área de DRP/MPS',null,'c'],
+      ['1.1.5','Entrevistas com MRP/Compras','c','Realizar entrevistas com a área de Compras',null,'c'],
+      ['1.1.6','Entrevistas com Financeiro','c','Entender participação e análises realizadas pelo Financeiro',null,'c'],
+      ['1.1.7','Entrevistas com as Diretorias','c','Realizar entrevistas executivas com a Diretoria',null,'c'],
+      ['1.1.8','Consolidar entrevistas e reuniões','n','Consolidar todas as informações captadas nas entrevistas','dp','c'],
+      ['1.1.9','Validar Macro Processo de Demanda','c','Validar fluxo macro do processo de demanda com o cliente',null,'c'],
+    ]],
+    [1,'1.2. Análise da Demanda — Sell In',[
+      ['1.2.1','Demanda por diversos recortes — Sell In','n','Análises automatizadas com ajustes conforme especificidades do cliente','ad','c'],
+      ['1.2.2','Pareto de produto e clientes','n','Análises de concentração de demanda por produto e cliente','ad','c'],
+      ['1.2.3','Sazonalidade','n','Análise de sazonalidade histórica de Sell In','ad','c'],
+      ['1.2.4','Lançamentos e Descontinuações','n','Análise de impacto de novos produtos e descontinuações','ad','c'],
+      ['1.2.5','Montar material de análises','n','Montar material consolidado com análises de Sell In','cm','c'],
+    ]],
+    [1,'1.3. Caso Base de Demanda',[
+      ['1.3.1','Entender métrica atual de cálculo','c','Mapear junto ao cliente o modo de cálculo do FA e diferenças com nossa metodologia',null,'c'],
+      ['1.3.2','Analisar 12 meses de planos passados','c','Entender lag do plano, nível de mensuração e premissas usadas',null,'c'],
+      ['1.3.3','Calcular FA e Bias para o período','n','Calcular com nossa metodologia FA, Bias, WMAPE. FVA quando possível.','ad','c'],
+    ]],
+    [1,'1.4. Análise de Demanda — Sell Out',[
+      ['1.4.1','Demanda por diversos recortes — Sell Out','n','Análises de Sell Out em diferentes granularidades e recortes','ad','c'],
+      ['1.4.2','Analisar estoques dos distribuidores','n','Análise do Stock In Trade na cadeia de distribuição','ad','c'],
+      ['1.4.3','Analisar sazonalidade do Sell Out','n','Análise de sazonalidade do Sell Out e comparação com Sell In','ad','c'],
+    ]],
+    [1,'1.5. Assistência na Especificação — Demanda',[
+      ['1.5.1','Detalhar parâmetros para especificação da ferramenta','i','Preencher o formulário de implantação — Demanda',null,'b'],
+      ['1.5.2','Validar especificação dos parâmetros técnicos','i','Validar com o cliente a especificação da ferramenta',null,'b'],
+      ['1.5.3','Definir usuários e escopo da ferramenta','i','Definir lista de usuários e escopo de acesso',null,'b'],
+    ]],
+    [2,'2.1. Implantação do Plannera S&OP Demanda',[
+      ['2.1.1','Preparação de dados históricos','n','Preparar dados para carga antes da disponibilização do Plannera Demand','vd','b'],
+      ['2.1.2','Carga de Planos Passados','i','Subir os planos passados na ferramenta',null,'b'],
+      ['2.1.3','Carga de Dados','i','Cadastro de blocos, itens e séries de previsão',null,'b'],
+    ]],
+    [2,'2.2. Simulação da Estatística',[
+      ['2.2.1','Simular previsões estatísticas em diversos níveis de agregação','i','Rodar previsões em backtest no período de controle',null,'b'],
+      ['2.2.2','Definição de Nível de Série de Previsão','c','Apresentar resultados e sugerir nível ganhador ao cliente',null,'b'],
+      ['2.2.3','Comparar Simulação da Estatística e Caso Base','n','Comparar resultado da estatística com o caso base do cliente','ad','c'],
+    ]],
+    [2,'2.3. Análise e Tratamento de Outliers',[
+      ['2.3.1','Detecção de Outliers no nível Série de Previsão','n','Detectar outliers no histórico de demanda','ad','c'],
+      ['2.3.2','Tratamento de Outliers','n','Validar com o cliente a opção de tratamento dentro das sugestões','ad','c'],
+      ['2.3.3','Simular Previsões Estatísticas pós tratamento','i','Rodar nova simulação após o tratamento dos outliers',null,'c'],
+      ['2.3.4','Montar nova matriz ABC-XYZ','n','Análise da matriz ABC-XYZ pós tratamento de outliers','ad','c'],
+    ]],
+    [2,'2.4. Avaliação de Maturidade S&OP',[
+      ['2.4.1','Aplicar a Avaliação de Maturidade do S&OP','c','Conduzir o questionário de maturidade com o cliente',null,'c'],
+      ['2.4.2','Montar insights de maturidade','n','Consolidar resultados e insights da avaliação de maturidade','cm','c'],
+    ]],
+    [2,'2.5. Go Live Plannera S&OP Demanda',[
+      ['2.5.1','Go Live do módulo de Demanda','c','Marco de go live do módulo de Demanda no Plannera S&OP',null,'b'],
+    ]],
+    [3,'3.1. Operação Assistida Demanda',[
+      ['3.1.1','Sessão Prática Time de Planejamento','i','Treinamento geral com stakeholder e key user da ferramenta',null,'b'],
+      ['3.1.2','Sessão Prática: Temas Complementares','i','Explorar análises avançadas e uso de dashboards na ferramenta',null,'b'],
+      ['3.2.3','Sessão Prática dos usuários de colaboração','i','Escopo reduzido de explicação para usuários colaboradores',null,'b'],
+    ]],
+    [4,'4.1. Análise Qualitativa da Operação de Estoques',[
+      ['4.1.1','Entrevistas focadas em estoques','c','Realizar entrevistas sobre a operação de estoques',null,'c'],
+      ['4.1.2','Diagnóstico de características operacionais e restrições','c','Mapear restrições operacionais relacionadas a estoques',null,'c'],
+      ['4.1.3','Mapeamento da política atual','c','Documentar a política de estoques atual do cliente',null,'c'],
+      ['4.1.4','Mapeamento do Processo de GTE atual','c','Mapear o processo de Gestão de Transporte e Estoques atual',null,'c'],
+      ['4.1.5','Preparar material e validar operação de estoques','c','Montar e validar material de diagnóstico de estoques',null,'c'],
+    ]],
+    [4,'4.2. Análise Quantitativa da Operação de Estoques',[
+      ['4.2.1','Analisar grandes números de estoque em vários recortes','n','Análise quantitativa geral da posição de estoques','ad','c'],
+      ['4.2.2','Analisar estoques dos pontos de estoque','n','Análise por CD, filial e ponto de estoque','ad','c'],
+      ['4.2.3','Analisar giro, cobertura, capital empregado','n','Calcular indicadores de gestão de estoque por SKU/família','ad','c'],
+    ]],
+    [4,'4.3. Assistência na Especificação — Estoques',[
+      ['4.3.1','Detalhar parâmetros para especificação — Estoques','i','Preencher o formulário de implantação — Estoques',null,'b'],
+      ['4.3.2','Validar especificação dos parâmetros técnicos','i','Validar com o cliente a especificação da ferramenta de Estoques',null,'b'],
+    ]],
+    [5,'5.1. Implantação do Plannera S&OP Estoques',[
+      ['5.1.1','Carga de dados pós implantação do módulo de Estoques','i','Subir os dados de estoque na ferramenta após implantação',null,'b'],
+      ['5.1.2','Validação da carga e homologação final do módulo','i','Validar a carga de dados e homologar o módulo de Estoques',null,'b'],
+    ]],
+    [5,'5.2. Go Live Plannera S&OP Estoques',[
+      ['5.2.1','Go Live do módulo de Estoques','c','Marco de go live do módulo de Estoques no Plannera S&OP',null,'b'],
+    ]],
+    [6,'6.1. Operação Assistida Estoques',[
+      ['6.1.1','Sessão Prática: foco em estoques','i','Treinamento com foco nas funcionalidades de estoques da ferramenta',null,'b'],
+      ['6.1.2','Handover para CS','ci','Passagem de bastão para área de Customer Success',null,'b'],
+    ]],
+  ]
+};
+
+// ── SVG icons ─────────────────────────────────────────────────────────────────
+const ICHECK = `<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const IBOLT  = `<svg width="9" height="11" viewBox="0 0 9 11" fill="none"><path d="M5.5 1L1 6.5h3.5L3 10l5.5-5.5H5L5.5 1z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const ICHEV  = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4.5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const ICOPY  = `<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1 9V2a1 1 0 011-1h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+const IEXT   = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 1H11v3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 1L5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let currentTab    = 'essential';
+let currentPacote = 'all';
+const STORE_PREFIX = 'silvia_v1_';
+
+function getStore(tab){ try{return new Set(JSON.parse(localStorage.getItem(STORE_PREFIX+tab)||'[]'));}catch{return new Set();} }
+function saveStore(tab, s){ try{localStorage.setItem(STORE_PREFIX+tab, JSON.stringify([...s]));}catch{} }
+
+// Per-tab done sets (loaded on demand)
+const doneSets = {};
+function getDoneSet(tab){
+  if(!doneSets[tab]) doneSets[tab] = getStore(tab);
+  return doneSets[tab];
+}
+
+// ── Badge helpers ─────────────────────────────────────────────────────────────
+function badge(rc){
+  // Em modo Pura, atividades de Consultoria passam para Implantação
+  const isPura = currentPacote === 'pura';
+  if(rc==='n') return `<span class="rbadge rb-n">${IBOLT} SILVIA</span>`;
+  if(rc==='c') return isPura
+    ? `<span class="rbadge rb-i">Implantação</span>`
+    : `<span class="rbadge rb-c">Consultoria</span>`;
+  if(rc==='i') return `<span class="rbadge rb-i">Implantação</span>`;
+  if(rc==='ci') return isPura
+    ? `<span class="rbadge rb-i">Implantação</span>`
+    : `<span class="rbadge rb-ci">Consultoria + Impl.</span>`;
+  return '';
+}
+
+// ── Filtered rows helper ──────────────────────────────────────────────────────
+function isVisible(pacote){
+  if(currentPacote === 'all') return true;
+  if(currentPacote === 'pura') return pacote === 'b';
+  return true;
+}
+
+// ── Stats update ──────────────────────────────────────────────────────────────
+function updateStats(){
+  const data = ALL_DATA[currentTab] || [];
+  const doneSet = getDoneSet(currentTab);
+  const isPura = currentPacote === 'pura';
+  let total=0,nCnt=0,cCnt=0,iCnt=0,doneCnt=0;
+
+  data.forEach(g => g[2].forEach(a => {
+    if(!isVisible(a[5])) return;
+    total++;
+    if(a[2]==='n') nCnt++;
+    else if(isPura) iCnt++;  // no modo Pura tudo que não é Silvia vai para Implantação
+    else if(a[2]==='c'||a[2]==='ci') cCnt++;
+    else if(a[2]==='i') iCnt++;
+    if(doneSet.has(a[0])) doneCnt++;
+  }));
+
+  document.getElementById('cnt-total').textContent = total;
+  document.getElementById('cnt-n').textContent = nCnt;
+  document.getElementById('cnt-c').textContent = cCnt;
+  document.getElementById('cnt-i').textContent = iCnt;
+  document.getElementById('prog-n').textContent = doneCnt;
+  document.getElementById('prog-total').textContent = '/'+total;
+  const fill = document.getElementById('pfill');
+  if(fill) fill.style.width = total ? Math.round(doneCnt/total*100)+'%' : '0%';
+}
+
+// ── Render tab ────────────────────────────────────────────────────────────────
+function renderTab(tabId){
+  const root = document.getElementById('phases-root');
+  root.innerHTML = '';
+
+  const data   = ALL_DATA[tabId];
+  const phases = PHASES[tabId];
+  if(!data || !phases){ root.innerHTML = '<div style="padding:60px;text-align:center;color:var(--txt3);font-size:14px;">Este projeto ainda não possui atividades cadastradas.</div>'; return; }
+
+  const doneSet = getDoneSet(tabId);
+
+  // Group data by phase
+  const phGrp = {};
+  data.forEach(g => { (phGrp[g[0]] || (phGrp[g[0]]=[])).push(g); });
+
+  phases.forEach((ph, pi) => {
+    const groups = phGrp[ph.id] || [];
+    if(!groups.length) return;
+
+    const sec = document.createElement('div');
+    sec.className = 'phase-sec';
+
+    // Count for pills (considering pacote filter)
+    const isPura = currentPacote === 'pura';
+    let total=0, nCnt=0, cCnt=0, iCnt=0;
+    groups.forEach(g => g[2].forEach(a => {
+      if(!isVisible(a[5])) return;
+      total++;
+      if(a[2]==='n') nCnt++;
+      else if(isPura) iCnt++;
+      else if(a[2]==='c'||a[2]==='ci') cCnt++;
+      else if(a[2]==='i') iCnt++;
+    }));
+
+    const hdr = document.createElement('div');
+    hdr.className = 'ph-hdr';
+    hdr.innerHTML = `
+      <div class="ph-bar" style="background:${ph.color}"></div>
+      <div class="ph-title">${ph.id}. ${ph.name}</div>
+      <div class="ph-pills">
+        <span class="pill pill-t">${total} ativ.</span>
+        ${nCnt?`<span class="pill pill-n">${nCnt} Silvia</span>`:''}
+        ${cCnt?`<span class="pill pill-c">${cCnt} Consultoria</span>`:''}
+        ${iCnt?`<span class="pill pill-i">${iCnt} Impl.</span>`:''}
+      </div>
+      <div class="ph-chv">${ICHEV}</div>
+    `;
+
+    const body = document.createElement('div');
+    body.className = 'ph-body';
+    const inner = document.createElement('div');
+    inner.className = 'ph-inner';
+
+    // Column header
+    const colHead = document.createElement('div');
+    colHead.className = 'tbl-head';
+    colHead.innerHTML = `
+      <div class="th"></div>
+      <div class="th" style="color:var(--navy)">ID</div>
+      <div class="th" style="color:var(--navy)">Atividade</div>
+      <div class="th">Recurso</div>
+      <div class="th">Descrição</div>
+      <div class="th"></div>
+      <div class="th" style="justify-content:center">Horas Prog.</div>
+    `;
+    inner.appendChild(colHead);
+
+    hdr.addEventListener('click', () => {
+      const open = body.classList.toggle('open');
+      hdr.querySelector('.ph-chv').style.transform = open ? 'rotate(180deg)' : '';
+    });
+
+    groups.forEach(g => {
+      const dg = document.createElement('div');
+      dg.className = 'dg';
+
+      const dghdr = document.createElement('div');
+      dghdr.className = 'dg-hdr';
+      dghdr.style.borderLeftColor = ph.color;
+      dghdr.textContent = g[1];
+      dg.appendChild(dghdr);
+
+      g[2].forEach(act => {
+        const [id, name, rc, desc, sk, pk] = act;
+        const isNera = rc === 'n';
+        const wasDone = doneSet.has(id);
+        const visible = isVisible(pk);
+
+        const row = document.createElement('div');
+        row.className = 'act-row'+(isNera?' nera-row':'')+(wasDone?' done-row':'')+(visible?'':' hidden-row');
+        row.dataset.pacote = pk;
+
+        // Checkbox
+        const cellChk = document.createElement('div');
+        cellChk.className = 'cell-chk';
+        const chk = document.createElement('div');
+        chk.className = 'chk'+(wasDone?' done':'');
+        chk.innerHTML = wasDone ? ICHECK : '';
+        chk.addEventListener('click', () => {
+          const done = chk.classList.toggle('done');
+          chk.innerHTML = done ? ICHECK : '';
+          row.classList.toggle('done-row', done);
+          if(done) doneSet.add(id); else doneSet.delete(id);
+          saveStore(currentTab, doneSet);
+          updateStats();
+          const btn = row.querySelector('.btn-ativar');
+          if(btn) btn.disabled = done;
+        });
+        cellChk.appendChild(chk);
+
+        // ID
+        const cellId = document.createElement('div');
+        cellId.className = 'cell-id';
+        cellId.innerHTML = `<span class="act-id">${id}</span>`;
+
+        // Name + optional pacote tag
+        const cellName = document.createElement('div');
+        cellName.className = 'cell-name';
+        const pkTag = pk === 'c' ? `<span class="pk-tag">só consultiva</span>` : '';
+        cellName.innerHTML = `<span class="act-name${isNera?' nera':''}">${name}</span>${pkTag}`;
+
+        // Recurso
+        const cellRec = document.createElement('div');
+        cellRec.className = 'cell-rec';
+        cellRec.innerHTML = badge(rc);
+
+        // Desc
+        const cellDesc = document.createElement('div');
+        cellDesc.className = 'cell-desc';
+        cellDesc.innerHTML = desc ? `<span class="act-desc" title="${desc}">${desc}</span>` : '';
+
+        // Action
+        const cellAct = document.createElement('div');
+        cellAct.className = 'cell-act';
+        if(isNera && sk){
+          const btn = document.createElement('button');
+          btn.className = 'btn-ativar';
+          btn.innerHTML = IBOLT + ' Ativar';
+          btn.disabled = wasDone;
+          btn.addEventListener('click', e => { e.stopPropagation(); openDrawer(id, name, sk, desc); });
+          cellAct.appendChild(btn);
+        }
+
+        // Horas
+        const cellHrs = document.createElement('div');
+        cellHrs.className = 'cell-hrs';
+        cellHrs.innerHTML = `<div class="hrs-empty"></div>`;
+
+        row.append(cellChk, cellId, cellName, cellRec, cellDesc, cellAct, cellHrs);
+        dg.appendChild(row);
+      });
+
+      inner.appendChild(dg);
+    });
+
+    body.appendChild(inner);
+    sec.append(hdr, body);
+    root.appendChild(sec);
+  });
+}
+
+// ── Apply pacote filter ───────────────────────────────────────────────────────
+function applyPacoteFilter(){
+  document.querySelectorAll('.act-row').forEach(row => {
+    const pk = row.dataset.pacote;
+    row.classList.toggle('hidden-row', !isVisible(pk));
+  });
+}
+
+function setPacote(p){
+  currentPacote = p;
+  document.getElementById('filt-all').classList.toggle('active', p==='all');
+  document.getElementById('filt-pura').classList.toggle('active', p==='pura');
+  applyPacoteFilter();
+  updateStats();
+  // Refresh phase pills
+  renderTab(currentTab);
+  updateStats();
+}
+
+// ── Build tabs ────────────────────────────────────────────────────────────────
+function buildTabs(){
+  const tabsRoot = document.getElementById('tabs-root');
+  tabsRoot.innerHTML = '';
+  TABS.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'tab'+(t.id===currentTab?' active':'')+(t.active?'':' locked');
+    btn.innerHTML = `<div class="tdot" style="background:${t.id===currentTab||t.active?t.color:'#ccc'}"></div>${t.label}`;
+    if(t.active){
+      btn.addEventListener('click', () => {
+        if(currentTab===t.id) return;
+        currentTab = t.id;
+        buildTabs();
+        renderTab(currentTab);
+        updateStats();
+      });
+    }
+    tabsRoot.appendChild(btn);
+  });
+}
+
+// ── Drawer ────────────────────────────────────────────────────────────────────
+const overlay = document.getElementById('overlay');
+const drawer  = document.getElementById('drawer');
+const dbody   = document.getElementById('drawer-body');
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function openDrawer(id, name, sk, desc){
+  const prompt = `Silvia, vou iniciar a atividade ${id} — ${name}.\n\nSkill: ${SKILLS[sk]}\n\n${PROMPTS[sk]}\n\nAnexe o arquivo a esta mensagem e confirme para eu começar.`;
+  dbody.innerHTML = `
+    <div class="d-tag">${IBOLT} ${SKILLS[sk]}</div>
+    <div class="d-title">${esc(name)}</div>
+    <div class="d-id">Atividade ${esc(id)}</div>
+    ${desc ? `<div class="d-instr">${esc(desc)}</div>` : ''}
+    <div class="d-plbl">Prompt para a Silvia</div>
+    <div class="d-prompt">${esc(prompt)}</div>
+    <div class="d-acts">
+      <button class="btn-pr" id="btn-cp">${ICOPY} Copiar prompt</button>
+      <a class="btn-se" href="https://teams.microsoft.com" target="_blank" rel="noopener">${IEXT} Abrir Teams</a>
+      <span class="cpok" id="cpok">${ICHECK} Copiado!</span>
+    </div>
+  `;
+  document.getElementById('btn-cp').addEventListener('click', () => {
+    navigator.clipboard.writeText(prompt).then(() => {
+      const el = document.getElementById('cpok');
+      el.style.display='flex';
+      setTimeout(()=>el.style.display='none',3000);
+    });
+  });
+  overlay.classList.add('open');
+  drawer.classList.add('open');
+}
+
+function closeDrawer(){
+  overlay.classList.remove('open');
+  drawer.classList.remove('open');
+}
+overlay.addEventListener('click', closeDrawer);
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeDrawer(); });
+
+// ── Align stats-left width to "Mini Diagnóstico" tab left edge ───────────────
+function alignStats(){
+  const tabs = document.querySelectorAll('#tabs-root .tab');
+  const miniTab = Array.from(tabs).find(t => t.textContent.trim().startsWith('Mini'));
+  const statsLeft = document.getElementById('stats-left');
+  if(!miniTab || !statsLeft) return;
+  const x = miniTab.getBoundingClientRect().left;
+  statsLeft.style.width = x + 'px';
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+buildTabs();
+renderTab(currentTab);
+updateStats();
+requestAnimationFrame(alignStats);
+window.addEventListener('resize', alignStats);
+</script>
+</body>
+</html>
