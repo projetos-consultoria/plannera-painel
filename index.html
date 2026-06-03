@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Silvia — Painel de Projeto · Plannera</title>
+<title>Silvia — JCE · S&OP e S&OE Advanced · Plannera</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -42,6 +42,7 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 .logo em{color:var(--orange);font-style:normal;}
 .tb-sep{width:1px;height:20px;background:rgba(255,255,255,.15);}
 .tb-label{font-size:11px;color:rgba(255,255,255,.38);letter-spacing:1.5px;text-transform:uppercase;}
+.tb-client{font-size:13px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.5px;}
 .tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
 .pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal);animation:pa 2.5s ease-in-out infinite;}
 @keyframes pa{0%,100%{opacity:1}50%{opacity:.35}}
@@ -50,17 +51,14 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 /* ── Tabs ── */
 .tabs{display:flex;padding:0 24px;background:var(--white);border-bottom:1px solid var(--border);gap:0;overflow-x:auto;}
 .tab{display:flex;align-items:center;gap:7px;padding:12px 16px;font-size:12px;font-weight:500;font-family:'Outfit',sans-serif;color:var(--txt3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .15s,border-color .15s;white-space:nowrap;margin-bottom:-1px;flex-shrink:0;}
-.tab:hover:not(.locked){color:var(--txt2);}
-.tab.active{color:var(--orange);border-bottom-color:var(--orange);font-weight:600;}
-.tab.locked{opacity:.45;cursor:pointer;transition:opacity .15s,color .15s,border-color .15s;}
-.tab.locked:hover{opacity:.7;}
+.tab.active{color:var(--purple);border-bottom-color:var(--purple);font-weight:600;}
 .tdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
 
 /* ── Stats strip ── */
 .stats{display:flex;align-items:stretch;background:var(--white);border-bottom:1px solid var(--border);}
-.stats-left{display:flex;align-items:stretch;flex-shrink:0;border-right:2px solid var(--border);}
-.stat{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:8px 16px;border-right:1px solid var(--borderl);gap:1px;text-align:center;flex:1;}
-.stat.stat-prog-wrap{flex:1;border-left:none;border-right:none;}
+.stats-left{display:flex;align-items:stretch;flex-shrink:0;}
+.stat{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:8px 20px;border-right:1px solid var(--borderl);gap:1px;text-align:center;}
+.stat.stat-prog-wrap{flex:1;border-right:none;}
 .stat-top{display:flex;align-items:center;gap:6px;}
 .stat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .sn{font-size:24px;font-weight:700;color:var(--txt);line-height:1;letter-spacing:-.5px;}
@@ -73,37 +71,7 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 .prog-num{font-size:20px;font-weight:700;color:var(--txt);letter-spacing:-.5px;font-family:'JetBrains Mono',monospace;}
 .prog-total{font-size:12px;color:var(--txt3);font-family:'JetBrains Mono',monospace;}
 .pbar{height:3px;background:var(--borderl);border-radius:2px;overflow:hidden;width:100%;}
-.pfill{height:100%;background:linear-gradient(90deg,var(--blue),var(--orange));border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;}
-
-/* ── Pacote filter bar ── */
-.filter-bar{
-  display:flex;align-items:center;gap:12px;
-  padding:8px 28px;
-  background:var(--white);
-  border-bottom:2px solid var(--border);
-}
-.filt-label{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--txt3);text-transform:uppercase;}
-.filt-seg{display:flex;gap:0;border:1.5px solid var(--border);border-radius:20px;overflow:hidden;}
-.filt-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:5px 14px;
-  font-size:11px;font-weight:600;font-family:'Outfit',sans-serif;
-  color:var(--txt2);background:transparent;border:none;
-  cursor:pointer;transition:all .15s;white-space:nowrap;
-  border-right:1px solid var(--borderl);
-}
-.filt-btn:last-child{border-right:none;}
-.filt-btn:hover{background:var(--bg);}
-.filt-btn.active{background:var(--navy);color:#fff;}
-.filt-btn.active.pura{background:var(--blue);}
-.filt-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.pk-tag{
-  display:inline-flex;align-items:center;
-  font-size:9px;font-weight:700;letter-spacing:.5px;
-  padding:2px 6px;border-radius:10px;margin-left:6px;
-  background:var(--bbg);color:var(--blue);border:1px solid var(--bbd);
-  white-space:nowrap;
-}
+.pfill{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;}
 
 /* ── Content ── */
 .content{padding:0 0 60px;}
@@ -114,8 +82,9 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 .ph-hdr{display:flex;align-items:center;gap:12px;padding:14px 28px;cursor:pointer;user-select:none;background:var(--white);border-bottom:1px solid var(--borderl);transition:background .12s;position:sticky;top:56px;z-index:30;}
 .ph-hdr:hover{background:#fafbfc;}
 .ph-bar{width:4px;height:22px;border-radius:2px;flex-shrink:0;}
-.ph-title{font-size:13px;font-weight:600;color:var(--txt);flex:1;}
-.ph-pills{display:flex;gap:6px;}
+.ph-title{font-size:13px;font-weight:600;color:var(--txt);display:flex;align-items:baseline;gap:8px;}
+.ph-date{font-size:11px;color:var(--txt3);font-family:'JetBrains Mono',monospace;font-weight:400;}
+.ph-pills{display:flex;gap:6px;margin-left:auto;}
 .pill{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;letter-spacing:.3px;}
 .pill-t{background:var(--borderl);color:var(--txt3);}
 .pill-n{background:var(--obg);color:var(--orange);}
@@ -128,21 +97,32 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 
 /* ── Deliverable group ── */
 .dg{padding:0;}
-.dg-hdr{display:flex;align-items:center;padding:7px 28px 7px 32px;font-size:11px;font-weight:700;color:var(--txt2);letter-spacing:.5px;text-transform:uppercase;border-left:3px solid transparent;background:var(--white);border-bottom:1px solid var(--borderl);border-top:1px solid var(--borderl);margin-top:2px;}
+.dg-hdr{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 28px 7px 32px;
+  font-size:11px;font-weight:700;color:var(--txt2);letter-spacing:.4px;
+  border-left:3px solid transparent;background:var(--white);
+  border-bottom:1px solid var(--borderl);border-top:1px solid var(--borderl);margin-top:2px;
+}
+.dg-entregavel{flex:1;}
+.dg-etapa-badge{
+  font-size:9px;font-weight:700;letter-spacing:.4px;
+  padding:2px 9px;border-radius:20px;white-space:nowrap;
+  flex-shrink:0;
+}
 
 /* ── Table header ── */
-.tbl-head{display:grid;grid-template-columns:38px 64px minmax(0,1.2fr) 118px minmax(0,2fr) 80px 110px;gap:0;padding:7px 28px;background:#edf0f7;border-bottom:2px solid var(--border);font-size:10px;font-weight:700;color:var(--txt2);letter-spacing:.8px;text-transform:uppercase;}
+.tbl-head{display:grid;grid-template-columns:38px 80px minmax(0,1.5fr) 118px minmax(0,2fr) 80px;gap:0;padding:7px 28px;background:#edf0f7;border-bottom:2px solid var(--border);font-size:10px;font-weight:700;color:var(--txt2);letter-spacing:.8px;text-transform:uppercase;}
 .th{display:flex;align-items:center;}
 
 /* ── Activity row ── */
-.act-row{display:grid;grid-template-columns:38px 64px minmax(0,1.2fr) 118px minmax(0,2fr) 80px 110px;gap:0;padding:0 28px;align-items:center;border-bottom:1px solid var(--borderl);background:var(--white);cursor:default;min-height:44px;transition:background .1s;}
+.act-row{display:grid;grid-template-columns:38px 80px minmax(0,1.5fr) 118px minmax(0,2fr) 80px;gap:0;padding:0 28px;align-items:center;border-bottom:1px solid var(--borderl);background:var(--white);cursor:default;min-height:44px;transition:background .1s;}
 .act-row:hover{background:#f8f9fd;}
 .act-row.nera-row{background:#fffcf8;}
 .act-row.nera-row:hover{background:#fff6ec;}
 .act-row.done-row{background:var(--bg)!important;}
 .act-row.done-row .act-name,.act-row.done-row .act-id{opacity:.3;text-decoration:line-through;}
 .act-row.done-row .act-desc{opacity:.2;}
-.act-row.hidden-row{display:none;}
 
 /* cells */
 .cell-chk{display:flex;align-items:center;justify-content:center;padding:10px 0;}
@@ -151,8 +131,6 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 .cell-rec{display:flex;align-items:center;padding:10px 12px 10px 0;}
 .cell-desc{display:flex;align-items:center;padding:10px 12px 10px 0;overflow:hidden;}
 .cell-act{display:flex;align-items:center;justify-content:flex-end;padding:10px 0;}
-.cell-hrs{display:flex;align-items:center;justify-content:center;padding:10px 0;font-size:12px;color:var(--txt3);font-family:'JetBrains Mono',monospace;}
-.hrs-empty{width:28px;height:1px;background:var(--borderl);}
 
 /* checkbox */
 .chk{width:16px;height:16px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;color:transparent;background:var(--white);}
@@ -174,12 +152,6 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 .rb-n{background:var(--orange);color:#fff;box-shadow:0 1px 4px rgba(247,148,30,.3);}
 .rb-c{background:var(--bbg);color:var(--blue);border:1px solid var(--bbd);}
 .rb-i{background:var(--tbg);color:var(--teal);border:1px solid var(--tbd);}
-.rb-ci{background:rgba(90,80,140,.07);color:var(--grey);border:1px solid rgba(90,80,140,.15);}
-
-/* ── Ativar button ── */
-.btn-ativar{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;font-family:'Outfit',sans-serif;color:var(--orange);background:var(--obg);border:1px solid var(--obd);padding:5px 11px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:all .15s;}
-.btn-ativar:hover{background:var(--orange);border-color:var(--orange);color:#fff;}
-.btn-ativar:disabled{opacity:.25;cursor:default;pointer-events:none;}
 
 /* ── Drawer ── */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100;opacity:0;pointer-events:none;transition:opacity .22s;backdrop-filter:blur(2px);}
@@ -188,18 +160,9 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 .drawer.open{transform:translateY(0);}
 .grip{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;}
 .dbody{padding:22px 36px 40px;max-width:800px;margin:0 auto;}
-.d-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--orange);background:var(--obg);border:1px solid var(--obd);padding:3px 10px;border-radius:20px;margin-bottom:14px;}
 .d-title{font-size:18px;font-weight:600;color:var(--txt);margin-bottom:4px;}
 .d-id{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt3);margin-bottom:18px;}
-.d-instr{font-size:13px;color:var(--txt2);line-height:1.65;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:8px;margin-bottom:20px;}
-.d-plbl{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--txt3);text-transform:uppercase;margin-bottom:8px;}
-.d-prompt{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt2);line-height:1.75;white-space:pre-wrap;margin-bottom:20px;max-height:150px;overflow-y:auto;}
-.d-acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
-.btn-pr{display:flex;align-items:center;gap:7px;padding:10px 20px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;transition:background .15s;}
-.btn-pr:hover{background:#e0830d;}
-.btn-se{display:flex;align-items:center;gap:7px;padding:10px 16px;background:transparent;color:var(--txt2);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;font-family:'Outfit',sans-serif;cursor:pointer;text-decoration:none;transition:background .15s;}
-.btn-se:hover{background:var(--bg);}
-.cpok{font-size:12px;color:var(--teal);font-weight:500;display:none;align-items:center;gap:5px;}
+.d-instr{font-size:13px;color:var(--txt2);line-height:1.65;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:8px;}
 </style>
 </head>
 <body>
@@ -208,7 +171,8 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 <div class="topbar">
   <div class="logo">SIL<em>VIA</em></div>
   <div class="tb-sep"></div>
-  <div class="tb-label">Projetos de Consultoria</div>
+  <div class="tb-label">Projeto</div>
+  <div class="tb-client">JCE</div>
   <div class="tb-right">
     <div class="pulse"></div>
     <div class="tb-status">ATIVO</div>
@@ -220,7 +184,7 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 
 <!-- Stats -->
 <div class="stats">
-  <div class="stats-left" id="stats-left">
+  <div class="stats-left">
     <div class="stat">
       <div class="stat-top"><div class="stat-dot" style="background:var(--navy)"></div><div class="sn" id="cnt-total">—</div></div>
       <div class="sl">Atividades</div>
@@ -250,19 +214,6 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
   </div>
 </div>
 
-<!-- Filter bar -->
-<div class="filter-bar">
-  <span class="filt-label">Pacote</span>
-  <div class="filt-seg">
-    <button class="filt-btn active" id="filt-all" onclick="setPacote('all')">
-      <div class="filt-dot" style="background:var(--navy)"></div> Implantação Consultiva
-    </button>
-    <button class="filt-btn pura" id="filt-pura" onclick="setPacote('pura')">
-      <div class="filt-dot" style="background:var(--blue)"></div> Implantação Pura
-    </button>
-  </div>
-</div>
-
 <!-- Content -->
 <div class="content" id="phases-root"></div>
 
@@ -274,243 +225,311 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 </div>
 
 <script>
-// ── Skills config ─────────────────────────────────────────────────────────────
-const SKILLS = {
-  vd:'Validação de Dados', ad:'Análise de Demanda',
-  dp:'Diagnóstico de Processo', cm:'Construção de Materiais', gp:'Governança de Projeto'
-};
-const PROMPTS = {
-  vd:'Envie a base de dados do cliente (Excel ou CSV) para que eu possa iniciar a validação.',
-  ad:'Envie a base histórica de demanda com as colunas: SKU, Período, Volume Realizado e Plano (quando disponível).',
-  dp:'Envie as notas ou resumo das entrevistas realizadas com as áreas envolvidas no processo.',
-  cm:'Envie os dados, análises e insumos já produzidos que devem embasar o material.',
-  gp:'Envie as informações do projeto: nome do cliente, escopo, datas previstas e lista de participantes.'
+// ── Etapa colors ──────────────────────────────────────────────────────────────
+const ETAPA_COLORS = {
+  '0. Pré projeto':           '#2ba09d',
+  '1. Mapeamento Demanda':    '#3a4c8a',
+  '2. Mapeamento Estoques':   '#7c5cbf',
+  '3. Diagnóstico S&OP As Is':'#f7941e',
+  '4. Operação Demanda':      '#d85d4b',
+  '5. Operação Estoques':     '#5C5B5B',
+  '6. Construção S&OP':       '#e07b39',
+  '7. Mapeamento S&OE':       '#2D3558',
+  '8. Operação S&OE':         '#3a4c8a',
+  '9. Construção S&OE':       '#2ba09d',
+  '10. Handover para CS':     '#2D3558',
 };
 
-// ── Tabs config ───────────────────────────────────────────────────────────────
+// ── Tabs ──────────────────────────────────────────────────────────────────────
 const TABS = [
-  {id:'essential',   label:'S&OP Essential',           color:'#f7941e', active:true},
-  {id:'professional',label:'S&OP Professional',        color:'#2ba09d', active:true},
-  {id:'diag',        label:'Diagnóstico S&OP e S&OE',  color:'#3a4c8a', active:false},
-  {id:'advanced',    label:'S&OP Advanced',            color:'#7c5cbf', active:false},
-  {id:'minidiag',    label:'Mini Diagnóstico',         color:'#d85d4b', active:false},
-  {id:'maturidade',  label:'Avaliação de Maturidade',  color:'#5C5B5B', active:false},
-  {id:'soe',         label:'S&OE e Abast.',            color:'#e07b39', active:false},
-  {id:'politica',    label:'Política de Estoques',     color:'#2ba09d', active:false},
-  {id:'dash',        label:'Dashboards',               color:'#3a4c8a', active:false},
+  {id:'advanced', label:'S&OP e S&OE Advanced', color:'#7c5cbf'},
 ];
 
-// ── Phases per project ─────────────────────────────────────────────────────────
+// ── Phases (Semanas) ──────────────────────────────────────────────────────────
 const PHASES = {
-  essential: [
-    {id:0,name:'Pré Projeto',   color:'#2ba09d'},
-    {id:1,name:'Mapeamento',    color:'#3a4c8a'},
-    {id:2,name:'Construção',    color:'#f7941e'},
-    {id:3,name:'Operação',      color:'#d85d4b'},
-  ],
-  professional: [
-    {id:0,name:'Pré Projeto',          color:'#2ba09d'},
-    {id:1,name:'Mapeamento Demanda',   color:'#3a4c8a'},
-    {id:2,name:'Construção Demanda',   color:'#f7941e'},
-    {id:3,name:'Operação Demanda',     color:'#d85d4b'},
-    {id:4,name:'Mapeamento Estoques',  color:'#7c5cbf'},
-    {id:5,name:'Construção Estoques',  color:'#e07b39'},
-    {id:6,name:'Operação Estoques',    color:'#5C5B5B'},
+  advanced: [
+    {id:1,  name:'Semana 1',  date:'05/jun', color:'#2ba09d'},
+    {id:2,  name:'Semana 2',  date:'12/jun', color:'#2ba09d'},
+    {id:3,  name:'Semana 3',  date:'19/jun', color:'#3a4c8a'},
+    {id:4,  name:'Semana 4',  date:'26/jun', color:'#3a4c8a'},
+    {id:5,  name:'Semana 5',  date:'03/jul', color:'#3a4c8a'},
+    {id:6,  name:'Semana 6',  date:'10/jul', color:'#3a4c8a'},
+    {id:7,  name:'Semana 7',  date:'17/jul', color:'#3a4c8a'},
+    {id:8,  name:'Semana 8',  date:'24/jul', color:'#7c5cbf'},
+    {id:9,  name:'Semana 9',  date:'31/jul', color:'#7c5cbf'},
+    {id:10, name:'Semana 10', date:'07/ago', color:'#f7941e'},
+    {id:11, name:'Semana 11', date:'14/ago', color:'#d85d4b'},
+    {id:12, name:'Semana 12', date:'21/ago', color:'#e07b39'},
+    {id:13, name:'Semana 13', date:'28/ago', color:'#2D3558'},
+    {id:14, name:'Semana 14', date:'04/set', color:'#2D3558'},
+    {id:15, name:'Semana 15', date:'11/set', color:'#e07b39'},
+    {id:16, name:'Semana 16', date:'18/set', color:'#2D3558'},
+    {id:17, name:'Semana 17', date:'25/set', color:'#5C5B5B'},
+    {id:18, name:'Semana 18', date:'02/out', color:'#e07b39'},
+    {id:19, name:'Semana 19', date:'09/out', color:'#2D3558'},
+    {id:20, name:'Semana 20', date:'16/out', color:'#2D3558'},
+    {id:21, name:'Semana 21', date:'23/out', color:'#e07b39'},
+    {id:22, name:'Semana 22', date:'30/out', color:'#2ba09d'},
+    {id:23, name:'Semana 23', date:'06/nov', color:'#2ba09d'},
+    {id:24, name:'Semana 24', date:'13/nov', color:'#2ba09d'},
+    {id:25, name:'Semana 25', date:'20/nov', color:'#2ba09d'},
+    {id:26, name:'Semana 26', date:'27/nov', color:'#2D3558'},
   ]
 };
 
 // ── Data ──────────────────────────────────────────────────────────────────────
-// [phase_id, 'Group', [[id, name, rc(n/c/i/ci), desc, skill|null, pacote(b/c)], ...]]
-// pacote: 'b' = Consultiva + Pura, 'c' = apenas Consultiva
+// [weekId, 'Entregável', [activities], 'Etapa']
+// activities: [id, name, rc(n/c/i), desc]
 const ALL_DATA = {
-  essential: [
-    [0,'0.1. Governança do Projeto',[
-      ['0.1.1','Handover de vendas para consultoria','c','Alinhar internamente escopo, parametrizações e contexto do cliente',null,'b'],
-      ['0.1.2','Material do Pré Kick-Off','n','Montar o material de Pré Kick Off','gp','b'],
-      ['0.1.3','Validar o material','c','Ajustar e validar o material de Pré Kick Off',null,'b'],
-      ['0.1.4','Reunião de Pré Kick-Off','c','Conduzir a reunião de Pré Kick Off com o cliente',null,'b'],
-      ['0.1.5','Agendar checkpoints periódicos','c','Agendar agendas com o cliente para tirar dúvidas sobre dados',null,'b'],
-    ]],
-    [0,'0.2. Validação dos Dados — Sell In',[
-      ['0.2.1','Enviar requisição de dados de Sell In','c','Enviar arquivo de requisição ao ponto focal antes do Pré Kick Off',null,'b'],
-      ['0.2.2','Resolver pendências de Sell In','n','Identificar quais bases não foram enviadas','vd','b'],
-      ['0.2.3','Verificar grandes números de Sell In','n','Fazer validação geral dos grandes números enviados','vd','b'],
-      ['0.2.4','Verificar inconsistências de cadastros de Sell In','n','Analisar cadastro de clientes, produtos e histórico de faturamento','vd','b'],
-      ['0.3.6','Go ahead para Kick Off','c','Marco de aprovação das bases e principais definições do projeto',null,'b'],
-      ['0.3.7','Material do Kick Off','n','Montar o material do Kick Off','cm','b'],
-      ['0.3.8','Reunião de Kick Off','c','Conduzir a reunião de Kick Off com o cliente',null,'b'],
-    ]],
-    [1,'1.1. Diagnóstico do Planejamento de Demanda',[
-      ['1.1.1','Entender parâmetros atuais de processo','c','Horizonte, Lag, Granularidades',null,'c'],
-      ['1.1.2','Entrevistas com Planejamento','c','Realizar entrevistas com área de Planejamento',null,'c'],
-      ['1.1.3','Entrevistas com Comercial/Marketing','c','Realizar entrevistas com Comercial e Marketing',null,'c'],
-      ['1.1.4','Entrevistas com DRP/MPS','c','Realizar entrevistas com a área de DRP/MPS',null,'c'],
-      ['1.1.5','Entrevistas com MRP/Compras','c','Realizar entrevistas com a área de Compras',null,'c'],
-      ['1.1.6','Entrevistas com Financeiro','c','Entender participação e análises realizadas pelo Financeiro',null,'c'],
-      ['1.1.7','Entrevistas com as Diretorias','c','Realizar entrevistas executivas com a Diretoria',null,'c'],
-      ['1.1.8','Consolidar entrevistas e reuniões','n','Consolidar todas as informações captadas nas entrevistas','dp','c'],
-      ['1.1.9','Validar Macro Processo de Demanda','c','Validar fluxo macro do processo de demanda com o cliente',null,'c'],
-    ]],
-    [1,'1.2. Análise da Demanda',[
-      ['1.2.1','Demanda por diversos recortes — Sell In','n','Análises automatizadas com ajustes conforme especificidades do cliente','ad','c'],
-      ['1.2.2','Pareto de produto e clientes','n','Análises de concentração de demanda por produto e cliente','ad','c'],
-      ['1.2.3','Sazonalidade','n','Análise de sazonalidade histórica','ad','c'],
-      ['1.2.4','Lançamentos e Descontinuações','n','Análise de impacto de novos produtos e descontinuações','ad','c'],
-      ['1.2.5','Montar material de análises','n','Montar material consolidado com todas as análises de demanda','cm','c'],
-    ]],
-    [1,'1.3. Caso Base de Demanda',[
-      ['1.3.1','Entender métrica atual de cálculo','c','Mapear junto ao cliente o modo de cálculo do FA e diferenças com nossa metodologia',null,'c'],
-      ['1.3.2','Analisar 12 meses de planos passados','c','Entender lag do plano, nível de mensuração e premissas usadas',null,'c'],
-      ['1.3.3','Calcular FA e Bias para o período','n','Calcular com nossa metodologia FA, Bias, WMAPE. FVA quando possível.','ad','c'],
-    ]],
-    [1,'1.5. Assistência na Especificação',[
-      ['1.5.1','Detalhar parâmetros para especificação da ferramenta','i','Preencher o formulário de implantação da ferramenta — Demanda',null,'b'],
-      ['1.5.2','Validar especificação dos parâmetros técnicos','i','Validar com o cliente a especificação da ferramenta',null,'b'],
-      ['1.5.3','Definir usuários e escopo da ferramenta','i','Definir lista de usuários e escopo de acesso',null,'b'],
-    ]],
-    [2,'2.1. Implantação do Plannera S&OP Demanda',[
-      ['2.1.1','Preparação de dados históricos','n','Preparar dados para carga antes da disponibilização do Plannera Demand','vd','b'],
-      ['2.1.2','Carga de Planos Passados','i','Subir os planos passados na ferramenta',null,'b'],
-      ['2.1.3','Carga de Dados','i','Cadastro de blocos, itens e séries de previsão',null,'b'],
-    ]],
-    [2,'2.2. Simulação da Estatística',[
-      ['2.2.1','Simular previsões estatísticas em diversos níveis de agregação','i','Rodar previsões em backtest no período de controle',null,'b'],
-      ['2.2.2','Definição de Nível de Série de Previsão','c','Apresentar resultados e sugerir nível ganhador ao cliente',null,'b'],
-      ['2.2.3','Comparar Simulação da Estatística e Caso Base','n','Comparar resultado da estatística com o caso base do cliente','ad','c'],
-    ]],
-    [2,'2.3. Análise e Tratamento de Outliers',[
-      ['2.3.1','Detecção de Outliers no nível Série de Previsão','n','Detectar outliers no histórico de demanda','ad','c'],
-      ['2.3.2','Tratamento de Outliers','n','Validar com o cliente a opção de tratamento dentro das sugestões','ad','c'],
-      ['2.3.3','Simular Previsões Estatísticas pós tratamento','i','Rodar nova simulação após o tratamento dos outliers',null,'c'],
-      ['2.3.4','Montar nova matriz ABC-XYZ','n','Análise da matriz ABC-XYZ pós tratamento de outliers','ad','c'],
-    ]],
-    [2,'2.4. Avaliação de Maturidade S&OP',[
-      ['2.4.1','Aplicar a Avaliação de Maturidade do S&OP','c','Conduzir o questionário de maturidade com o cliente',null,'c'],
-      ['2.4.2','Montar insights de maturidade','n','Consolidar resultados e insights da avaliação de maturidade','cm','c'],
-    ]],
-    [2,'2.5. Go Live Plannera S&OP Demanda',[
-      ['2.5.1','Go Live do módulo de Demanda','c','Marco de go live do módulo de Demanda no Plannera S&OP',null,'b'],
-    ]],
-    [3,'3.1. Operação Assistida Demanda',[
-      ['3.1.1','Sessão Prática Time de Planejamento','i','Treinamento geral com stakeholder e key user da ferramenta',null,'b'],
-      ['3.1.2','Sessão Prática: Temas Complementares','i','Explorar análises avançadas e uso de dashboards na ferramenta',null,'b'],
-      ['3.2.3','Sessão Prática dos usuários de colaboração','i','Escopo reduzido de explicação para usuários colaboradores',null,'b'],
-      ['3.2.4','Handover para CS','ci','Passagem de bastão para área de Customer Success',null,'b'],
-    ]],
-  ],
+  advanced: [
+    // ─── Semana 1 · 05/jun ────────────────────────────────────────────────
+    [1,'0.1. Governança do Projeto',[
+      ['S1.1','Handover de vendas para consultoria','c','Alinhamento interno entre vendas e consultoria + implantação para definir escopo do projeto, principais parametrizações'],
+      ['S1.2','Material do Pré Kick-Off','n','Montar o material de Pré Kick Off'],
+      ['S1.3','Validar o material','c','Ajustar e validar o material de Pré Kick Off'],
+      ['S1.4','Reunião de Pré Kick-Off','c','Alinhamento prévio: dados a serem recebidos, pessoas envolvidas, datas de Kick-Off, GTs e Comitês Diretivos'],
+      ['S1.5','Agendar checkpoints periódicos','c','Agendar agendas com o cliente para tirar dúvidas sobre dados'],
+    ],'0. Pré projeto'],
+    [1,'0.2. Validação dos Dados — Sell In',[
+      ['S1.6','Enviar requisição de dados de Sell In','c','Enviar o arquivo de requisição de dados para o ponto focal antes do Pré Kick Off'],
+    ],'0. Pré projeto'],
 
-  professional: [
-    [0,'0.1. Governança do Projeto',[
-      ['0.1.1','Handover de vendas para consultoria','c','Alinhar internamente escopo, parametrizações e contexto do cliente',null,'b'],
-      ['0.1.2','Material do Pré Kick-Off','n','Montar o material de Pré Kick Off','gp','b'],
-      ['0.1.3','Validar o material','c','Ajustar e validar o material de Pré Kick Off',null,'b'],
-      ['0.1.4','Reunião de Pré Kick-Off','c','Conduzir a reunião de Pré Kick Off com o cliente',null,'b'],
-      ['0.1.5','Agendar checkpoints periódicos','c','Agendar agendas com o cliente para tirar dúvidas sobre dados',null,'b'],
-    ]],
-    [0,'0.2. Validação dos Dados — Sell In',[
-      ['0.2.1','Enviar requisição de dados de Sell In','c','Enviar arquivo de requisição ao ponto focal antes do Pré Kick Off',null,'b'],
-      ['0.2.2','Resolver pendências de Sell In','n','Identificar quais bases não foram enviadas','vd','b'],
-      ['0.2.3','Verificar grandes números de Sell In','n','Fazer validação geral dos grandes números enviados','vd','b'],
-      ['0.2.4','Verificar inconsistências de cadastros de Sell In','n','Analisar cadastro de clientes, produtos e histórico de faturamento','vd','b'],
-    ]],
-    [0,'0.3. Validação dos Dados — Sell Out',[
-      ['0.3.1','Enviar requisição de dados de Sell Out','c','Enviar arquivo de requisição de dados de Sell Out ao ponto focal',null,'b'],
-      ['0.3.2','Verificar inconsistências de cadastros de Sell Out','n','Analisar cadastros dos dados de Sell Out','vd','b'],
-      ['0.3.3','Verificar grandes números de Sell Out','n','Fazer validação geral dos grandes números de Sell Out','vd','b'],
-      ['0.3.4','Resolver pendências de Sell Out','n','Identificar e resolver pendências dos dados de Sell Out','vd','b'],
-      ['0.3.5','Crosscheck Sell In vs Sell Out','n','Cruzar as bases de Sell In e Sell Out para identificar divergências','vd','b'],
-      ['0.3.6','Go ahead para Kick Off','c','Marco de aprovação das bases e principais definições do projeto',null,'b'],
-      ['0.3.7','Material do Kick Off','n','Montar o material do Kick Off','cm','b'],
-      ['0.3.8','Reunião de Kick Off','c','Conduzir a reunião de Kick Off com o cliente',null,'b'],
-    ]],
-    [1,'1.1. Diagnóstico do Planejamento de Demanda',[
-      ['1.1.1','Entender parâmetros atuais de processo','c','Horizonte, Lag, Granularidades',null,'c'],
-      ['1.1.2','Entrevistas com Planejamento','c','Realizar entrevistas com área de Planejamento',null,'c'],
-      ['1.1.3','Entrevistas com Comercial/Marketing','c','Realizar entrevistas com Comercial e Marketing',null,'c'],
-      ['1.1.4','Entrevistas com DRP/MPS','c','Realizar entrevistas com a área de DRP/MPS',null,'c'],
-      ['1.1.5','Entrevistas com MRP/Compras','c','Realizar entrevistas com a área de Compras',null,'c'],
-      ['1.1.6','Entrevistas com Financeiro','c','Entender participação e análises realizadas pelo Financeiro',null,'c'],
-      ['1.1.7','Entrevistas com as Diretorias','c','Realizar entrevistas executivas com a Diretoria',null,'c'],
-      ['1.1.8','Consolidar entrevistas e reuniões','n','Consolidar todas as informações captadas nas entrevistas','dp','c'],
-      ['1.1.9','Validar Macro Processo de Demanda','c','Validar fluxo macro do processo de demanda com o cliente',null,'c'],
-    ]],
-    [1,'1.2. Análise da Demanda — Sell In',[
-      ['1.2.1','Demanda por diversos recortes — Sell In','n','Análises automatizadas com ajustes conforme especificidades do cliente','ad','c'],
-      ['1.2.2','Pareto de produto e clientes','n','Análises de concentração de demanda por produto e cliente','ad','c'],
-      ['1.2.3','Sazonalidade','n','Análise de sazonalidade histórica de Sell In','ad','c'],
-      ['1.2.4','Lançamentos e Descontinuações','n','Análise de impacto de novos produtos e descontinuações','ad','c'],
-      ['1.2.5','Montar material de análises','n','Montar material consolidado com análises de Sell In','cm','c'],
-    ]],
-    [1,'1.3. Caso Base de Demanda',[
-      ['1.3.1','Entender métrica atual de cálculo','c','Mapear junto ao cliente o modo de cálculo do FA e diferenças com nossa metodologia',null,'c'],
-      ['1.3.2','Analisar 12 meses de planos passados','c','Entender lag do plano, nível de mensuração e premissas usadas',null,'c'],
-      ['1.3.3','Calcular FA e Bias para o período','n','Calcular com nossa metodologia FA, Bias, WMAPE. FVA quando possível.','ad','c'],
-    ]],
-    [1,'1.4. Análise de Demanda — Sell Out',[
-      ['1.4.1','Demanda por diversos recortes — Sell Out','n','Análises de Sell Out em diferentes granularidades e recortes','ad','c'],
-      ['1.4.2','Analisar estoques dos distribuidores','n','Análise do Stock In Trade na cadeia de distribuição','ad','c'],
-      ['1.4.3','Analisar sazonalidade do Sell Out','n','Análise de sazonalidade do Sell Out e comparação com Sell In','ad','c'],
-    ]],
-    [1,'1.5. Assistência na Especificação — Demanda',[
-      ['1.5.1','Detalhar parâmetros para especificação da ferramenta','i','Preencher o formulário de implantação — Demanda',null,'b'],
-      ['1.5.2','Validar especificação dos parâmetros técnicos','i','Validar com o cliente a especificação da ferramenta',null,'b'],
-      ['1.5.3','Definir usuários e escopo da ferramenta','i','Definir lista de usuários e escopo de acesso',null,'b'],
-    ]],
-    [2,'2.1. Implantação do Plannera S&OP Demanda',[
-      ['2.1.1','Preparação de dados históricos','n','Preparar dados para carga antes da disponibilização do Plannera Demand','vd','b'],
-      ['2.1.2','Carga de Planos Passados','i','Subir os planos passados na ferramenta',null,'b'],
-      ['2.1.3','Carga de Dados','i','Cadastro de blocos, itens e séries de previsão',null,'b'],
-    ]],
-    [2,'2.2. Simulação da Estatística',[
-      ['2.2.1','Simular previsões estatísticas em diversos níveis de agregação','i','Rodar previsões em backtest no período de controle',null,'b'],
-      ['2.2.2','Definição de Nível de Série de Previsão','c','Apresentar resultados e sugerir nível ganhador ao cliente',null,'b'],
-      ['2.2.3','Comparar Simulação da Estatística e Caso Base','n','Comparar resultado da estatística com o caso base do cliente','ad','c'],
-    ]],
-    [2,'2.3. Análise e Tratamento de Outliers',[
-      ['2.3.1','Detecção de Outliers no nível Série de Previsão','n','Detectar outliers no histórico de demanda','ad','c'],
-      ['2.3.2','Tratamento de Outliers','n','Validar com o cliente a opção de tratamento dentro das sugestões','ad','c'],
-      ['2.3.3','Simular Previsões Estatísticas pós tratamento','i','Rodar nova simulação após o tratamento dos outliers',null,'c'],
-      ['2.3.4','Montar nova matriz ABC-XYZ','n','Análise da matriz ABC-XYZ pós tratamento de outliers','ad','c'],
-    ]],
-    [2,'2.4. Avaliação de Maturidade S&OP',[
-      ['2.4.1','Aplicar a Avaliação de Maturidade do S&OP','c','Conduzir o questionário de maturidade com o cliente',null,'c'],
-      ['2.4.2','Montar insights de maturidade','n','Consolidar resultados e insights da avaliação de maturidade','cm','c'],
-    ]],
-    [2,'2.5. Go Live Plannera S&OP Demanda',[
-      ['2.5.1','Go Live do módulo de Demanda','c','Marco de go live do módulo de Demanda no Plannera S&OP',null,'b'],
-    ]],
-    [3,'3.1. Operação Assistida Demanda',[
-      ['3.1.1','Sessão Prática Time de Planejamento','i','Treinamento geral com stakeholder e key user da ferramenta',null,'b'],
-      ['3.1.2','Sessão Prática: Temas Complementares','i','Explorar análises avançadas e uso de dashboards na ferramenta',null,'b'],
-      ['3.2.3','Sessão Prática dos usuários de colaboração','i','Escopo reduzido de explicação para usuários colaboradores',null,'b'],
-    ]],
-    [4,'4.1. Análise Qualitativa da Operação de Estoques',[
-      ['4.1.1','Entrevistas focadas em estoques','c','Realizar entrevistas sobre a operação de estoques',null,'c'],
-      ['4.1.2','Diagnóstico de características operacionais e restrições','c','Mapear restrições operacionais relacionadas a estoques',null,'c'],
-      ['4.1.3','Mapeamento da política atual','c','Documentar a política de estoques atual do cliente',null,'c'],
-      ['4.1.4','Mapeamento do Processo de GTE atual','c','Mapear o processo de Gestão de Transporte e Estoques atual',null,'c'],
-      ['4.1.5','Preparar material e validar operação de estoques','c','Montar e validar material de diagnóstico de estoques',null,'c'],
-    ]],
-    [4,'4.2. Análise Quantitativa da Operação de Estoques',[
-      ['4.2.1','Analisar grandes números de estoque em vários recortes','n','Análise quantitativa geral da posição de estoques','ad','c'],
-      ['4.2.2','Analisar estoques dos pontos de estoque','n','Análise por CD, filial e ponto de estoque','ad','c'],
-      ['4.2.3','Analisar giro, cobertura, capital empregado','n','Calcular indicadores de gestão de estoque por SKU/família','ad','c'],
-    ]],
-    [4,'4.3. Assistência na Especificação — Estoques',[
-      ['4.3.1','Detalhar parâmetros para especificação — Estoques','i','Preencher o formulário de implantação — Estoques',null,'b'],
-      ['4.3.2','Validar especificação dos parâmetros técnicos','i','Validar com o cliente a especificação da ferramenta de Estoques',null,'b'],
-    ]],
-    [5,'5.1. Implantação do Plannera S&OP Estoques',[
-      ['5.1.1','Carga de dados pós implantação do módulo de Estoques','i','Subir os dados de estoque na ferramenta após implantação',null,'b'],
-      ['5.1.2','Validação da carga e homologação final do módulo','i','Validar a carga de dados e homologar o módulo de Estoques',null,'b'],
-    ]],
-    [5,'5.2. Go Live Plannera S&OP Estoques',[
-      ['5.2.1','Go Live do módulo de Estoques','c','Marco de go live do módulo de Estoques no Plannera S&OP',null,'b'],
-    ]],
-    [6,'6.1. Operação Assistida Estoques',[
-      ['6.1.1','Sessão Prática: foco em estoques','i','Treinamento com foco nas funcionalidades de estoques da ferramenta',null,'b'],
-      ['6.1.2','Handover para CS','ci','Passagem de bastão para área de Customer Success',null,'b'],
-    ]],
+    // ─── Semana 2 · 12/jun ────────────────────────────────────────────────
+    [2,'0.2. Validação dos Dados — Sell In',[
+      ['S2.1','Resolver pendências de Sell In','n','Identificar quais bases não foram enviadas'],
+      ['S2.2','Verificar grandes números de Sell In','n','Fazer uma validação geral dos grandes números enviados'],
+      ['S2.3','Verificar inconsistências de cadastros de Sell In','n','Analisar cadastro de clientes, produtos e histórico de faturamento'],
+    ],'0. Pré projeto'],
+    [2,'1.1. Diagnóstico do Planejamento de Demanda',[
+      ['S2.4','Entender parâmetros atuais de processo','c','Horizonte, Lag, Granularidades'],
+      ['S2.5','Entrevistas com Engenharia','c','Realizar entrevistas com área de Engenharia para entendimento do processo de lançamento de produtos'],
+      ['S2.6','Entrevistas com Comercial/Marketing Aqua Brasil','c','Realizar entrevistas com Comercial/Marketing para entender como colaboram com o S&OP e a gestão de portfólio'],
+      ['S2.7','Entrevistas com Comercial/Marketing Toyama','c','Realizar entrevistas com Comercial/Marketing para entender como colaboram com o S&OP e a gestão de portfólio'],
+      ['S2.8','Entrevistas com MRP/Compras','c','Realizar entrevista com Compras para entender participação ao longo do processo (leadtime, fornecedores, insumos, embalagens)'],
+      ['S2.9','Entrevistas com Planejamento','c','Realizar entrevista com planejamento para entender processos atuais e conexão com S&OP e S&OE'],
+      ['S2.10','Entrevistas com Comercial/Marketing Nordtech','c','Realizar entrevistas com Comercial/Marketing para entender como colaboram com o S&OP e a gestão de portfólio'],
+    ],'1. Mapeamento Demanda'],
+
+    // ─── Semana 3 · 19/jun ────────────────────────────────────────────────
+    [3,'1.1. Diagnóstico do Planejamento de Demanda',[
+      ['S3.1','Entrevistas com as Diretorias','c','Entender com os Diretores as principais dores, gargalos e resultados esperados com o projeto'],
+      ['S3.2','Consolidar entrevistas e reuniões','n','Montar consolidado de todas as agendas e traçar o mapeamento atual do processo de S&OP'],
+      ['S3.3','Go ahead para Kick Off','c','Marco que sinaliza OK das bases e das principais definições de equipe e agendamento de reuniões'],
+      ['S3.4','Material do Kick Off','n','Montar o material do Kick Off'],
+      ['S3.5','Reunião de Kick Off','c','Reunião oficial com objetivos, entregáveis, cronograma e milestones do projeto'],
+    ],'1. Mapeamento Demanda'],
+    [3,'1.2. Avaliação de Maturidade S&OP',[
+      ['S3.6','Aplicar a Avaliação de Maturidade do S&OP','c','Reunião com o cliente para responder a Avaliação de Maturidade do processo de S&OP'],
+      ['S3.7','Montar insights de maturidade','n','Relatório de maturidade detalhado com insights específicos de negócio'],
+    ],'1. Mapeamento Demanda'],
+
+    // ─── Semana 4 · 26/jun ────────────────────────────────────────────────
+    [4,'1.3. Análise da Demanda — Sell In',[
+      ['S4.1','1º Grupo de Trabalho — Conceitual S&OP/IBP','c','Grupo de trabalho para destrinchar os principais conceitos de S&OP e IBP de acordo com a metodologia Plannera'],
+      ['S4.2','Demanda por diversos recortes — Sell In','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
+      ['S4.3','Pareto de produto e clientes','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
+      ['S4.4','Sazonalidade','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
+      ['S4.5','Lançamentos e Descontinuações','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
+      ['S4.6','Gestão do Portfólio','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
+      ['S4.7','Montar material de análises','n','Montar um material consolidado com as análises de demanda'],
+    ],'1. Mapeamento Demanda'],
+
+    // ─── Semana 5 · 03/jul ────────────────────────────────────────────────
+    [5,'1.3. Análise da Demanda — Sell In',[
+      ['S5.1','2º Grupo de Trabalho — Análises de Demanda','c','Grupo de trabalho para apresentar as análises de demanda com insights estratégicos'],
+    ],'1. Mapeamento Demanda'],
+    [5,'1.4. Implantação do Plannera S&OP Demanda',[
+      ['S5.2','Detalhar parâmetros para especificação da ferramenta — Demanda','i','Preencher o formulário de implantação da ferramenta'],
+      ['S5.3','Validar especificação dos parâmetros técnicos da ferramenta — Demanda','i','Validar com o cliente a especificação da ferramenta'],
+      ['S5.4','Definir usuários e escopo da ferramenta','i','Definir com o cliente quem serão os usuários que utilizarão a ferramenta e seus escopos'],
+      ['S5.5','Preparação de dados históricos','n','Preparar dados para subir na ferramenta, garantindo que estejam prontos antes da disponibilização do Plannera S&OP Demanda'],
+    ],'1. Mapeamento Demanda'],
+
+    // ─── Semana 6 · 10/jul ────────────────────────────────────────────────
+    [6,'1.4. Implantação do Plannera S&OP Demanda',[
+      ['S6.1','3º Grupo de Trabalho — Especificação da Ferramenta S&OP Demanda','i','Grupo de trabalho para definir a especificação da ferramenta de S&OP módulo de Demanda'],
+    ],'1. Mapeamento Demanda'],
+    [6,'1.5. Caso Base de Demanda',[
+      ['S6.2','Analisar 12 meses de planos passados','c','Entender o lag do plano, o nível de mensuração, as premissas usadas na geração e o papel de cada área'],
+      ['S6.3','Calcular o FA e Bias para o período','n','Calcular com a nossa metodologia todos os indicadores principais do planejamento da demanda. FVA quando possível'],
+    ],'1. Mapeamento Demanda'],
+
+    // ─── Semana 7 · 17/jul ────────────────────────────────────────────────
+    [7,'1.5. Caso Base de Demanda',[
+      ['S7.1','4º Grupo de Trabalho — Caso Base de Demanda','c','Grupo de trabalho para apresentar o resultado atual do Forecast Accuracy e Bias do cliente'],
+    ],'1. Mapeamento Demanda'],
+    [7,'1.6. Simulação da Estatística',[
+      ['S7.2','Simular as previsões estatísticas em diversos níveis de agregação','i','Rodar as previsões estatísticas em backtest no período de controle, respeitando o lag escolhido para o cliente'],
+      ['S7.3','Definição de Nível de Série de Previsão','c','Apresentar os resultados e sugerir ao cliente um nível ganhador; definir o que será utilizado'],
+      ['S7.4','Comparar Simulação da Estatística e Caso Base','n','Análise para comparar o resultado da estatística com o caso base'],
+    ],'1. Mapeamento Demanda'],
+    [7,'1.7. Análise e Tratamento de Outliers',[
+      ['S7.5','Detecção de Outliers no nível Série de Previsão','n','Análise para detectar outliers'],
+      ['S7.6','Tratamento de Outliers','n','Fazer os ajustes no histórico de faturamento'],
+      ['S7.7','Simular Previsões Estatísticas pós tratamento de Outliers','i','Refazer o back test após tratamento dos outliers'],
+      ['S7.8','Montar nova matriz ABC-XYZ','n','Análise da matriz ABC-XYZ pós tratamento de outliers'],
+    ],'1. Mapeamento Demanda'],
+
+    // ─── Semana 8 · 24/jul ────────────────────────────────────────────────
+    [8,'1.7. Análise e Tratamento de Outliers',[
+      ['S8.1','5º Grupo de Trabalho — Simulação Estatística','c','Grupo de trabalho para apresentar o resultado da simulação estatística vs o caso base'],
+    ],'1. Mapeamento Demanda'],
+    [8,'2.1. Análise Qualitativa da Operação de Estoques',[
+      ['S8.2','Mapeamento da política atual','c','Mapear os principais critérios, parâmetros e ferramentas utilizados na política atual da empresa'],
+      ['S8.3','Mapeamento do Processo de GTE atual','c','Mapear como funciona o processo atual no âmbito da Revisão da Política e do Monitoramento do estoque'],
+      ['S8.4','Preparar material e validar operação de estoques','c','Material que sintetize a operação de estoques atual: áreas, malha logística, política e processo de gestão tática'],
+    ],'2. Mapeamento Estoques'],
+    [8,'2.2. Análise Quantitativa da Operação de Estoques',[
+      ['S8.5','Analisar grandes números de estoque em vários recortes','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
+      ['S8.6','Analisar estoques dos pontos de estoque','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
+      ['S8.7','Analisar giro, cobertura, capital empregado','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
+    ],'2. Mapeamento Estoques'],
+
+    // ─── Semana 9 · 31/jul ────────────────────────────────────────────────
+    [9,'2.3. Implantação do Plannera S&OP Estoques',[
+      ['S9.1','Detalhar parâmetros para especificação da ferramenta — Estoques','i','Preencher o formulário de implantação da ferramenta'],
+      ['S9.2','Validar especificação dos parâmetros técnicos da ferramenta — Estoques','i','Validar com o cliente a especificação da ferramenta'],
+      ['S9.3','Carga de dados pós implantação do módulo de Estoques','i','Cadastros de Política, estoques, centros'],
+      ['S9.4','Validação da carga de dados e homologação final do módulo de Estoques','i','Testes de reabastecimento e validação com o cliente'],
+      ['S9.5','6º Grupo de Trabalho — Análises de Estoques','c','Grupo de trabalho para apresentar o cenário atual dos estoques e fazer a especificação da ferramenta de S&OP módulo de Estoques'],
+    ],'2. Mapeamento Estoques'],
+    [9,'3.1. Análises Quantitativas dos Indicadores Atuais',[
+      ['S9.6','Montar CB de Incerteza','c','Indicadores de Incerteza atual'],
+      ['S9.7','Montar CB de Estoques','c','Indicadores de estoques atual'],
+      ['S9.8','Montar CB de Nível de Serviço','c','Indicadores de nível de serviço atual'],
+      ['S9.9','Montar Pizza da Incerteza','c','Pizza da incerteza com o viés financeiro'],
+    ],'3. Diagnóstico S&OP As Is'],
+
+    // ─── Semana 10 · 07/ago ───────────────────────────────────────────────
+    [10,'3.2. Mapeamento do Processo de S&OP atual',[
+      ['S10.1','Diagnóstico de Pessoas','c','Avaliar estrutura organizacional, perfil e dimensionamento do time e cultura de planejamento'],
+      ['S10.2','Diagnóstico de Tecnologia','c','Mapear ferramentas utilizadas para o planejamento, fontes de dados e necessidades de integração'],
+      ['S10.3','Diagnóstico de Processo','c','Entender parâmetros atuais: horizonte, indicadores, lags, agregação, cronograma, papéis e responsabilidades, reuniões'],
+      ['S10.4','Reunião interna para discussão do diagnóstico do processo S&OP','c','Reunião técnica com equipe para discutir fluxograma preliminar, debater primeiras ideias e gerar insumos para a Construção'],
+      ['S10.5','Montar o material executivo do processo As Is de S&OP','c','Preparar material para reunião da diretoria'],
+      ['S10.6','Apresentar relatório de Mapeamento S&OP para o time de projeto','c','Alinhar com o time de projeto o material que será apresentado para a diretoria'],
+      ['S10.7','Agenda Executiva — Diagnóstico S&OP As Is','c','Reunião executiva para validar o fluxo as is do processo de S&OP'],
+    ],'3. Diagnóstico S&OP As Is'],
+    [10,'4.1. Operação Assistida Demanda',[
+      ['S10.8','Go Live do módulo de Demanda','c','Fazer o Go Live da Ferramenta S&OP módulo de Demanda'],
+    ],'4. Operação Demanda'],
+
+    // ─── Semana 11 · 14/ago ───────────────────────────────────────────────
+    [11,'4.1. Operação Assistida Demanda',[
+      ['S11.1','Sessão Prática — Time de Planejamento','i','Treinamento geral com o stakeholder e o key user da ferramenta'],
+      ['S11.2','Sessão Prática — Temas Complementares','i','Explorar como melhor realizar análises na ferramenta e sanar dúvidas do cliente'],
+      ['S11.3','Sessão Prática dos usuários de colaboração','i','Escopo reduzido de explicação da ferramenta para os usuários colaboradores'],
+    ],'4. Operação Demanda'],
+    [11,'5.1. Operação Assistida Estoques',[
+      ['S11.4','Go Live do módulo de Estoques','c','Fazer o Go Live da Ferramenta S&OP módulo de Estoques'],
+      ['S11.5','Sessão Prática — foco em estoques','i','Treinamento com o key user do módulo de estoques'],
+    ],'5. Operação Estoques'],
+
+    // ─── Semana 12 · 21/ago ───────────────────────────────────────────────
+    [12,'6.1. Desenho To Be S&OP',[
+      ['S12.1','Brainstorming inicial do Processo To-Be','c','Brainstorming inicial interno do Processo To-Be'],
+      ['S12.2','Desenho de Processo: Fluxograma','c','Desenho do fluxograma proposto do processo de S&OP aberto por área'],
+      ['S12.3','Desenho de Processo: Cronograma','c','Desenho do cronograma proposto do processo de S&OP'],
+      ['S12.4','1º Follow Up — Construção S&OP','c','Reunião com o time de projeto do cliente para validações do processo to be'],
+    ],'6. Construção S&OP'],
+    [12,'7.1. Implantação do Plannera S&OE',[
+      ['S12.5','7º Grupo de Trabalho — Conceitual DRP e Demand Sensing','c','Grupo de trabalho para apresentar os conceitos de DRP e Demand Sensing'],
+    ],'7. Mapeamento S&OE'],
+
+    // ─── Semana 13 · 28/ago ───────────────────────────────────────────────
+    [13,'7.1. Implantação do Plannera S&OE',[
+      ['S13.1','Detalhar parâmetros para especificação da ferramenta — S&OE','i','Parâmetros para o DRP rodar: etapas, política de estoque, CDs'],
+      ['S13.2','Validar especificação dos parâmetros técnicos da ferramenta — S&OE','i','Validar com o cliente a especificação da ferramenta'],
+      ['S13.3','8º Grupo de Trabalho — Especificação da Ferramenta de S&OE','i','Grupo de trabalho para apresentar e definir a especificação da ferramenta de S&OE'],
+    ],'7. Mapeamento S&OE'],
+
+    // ─── Semana 14 · 04/set ───────────────────────────────────────────────
+    [14,'7.1. Implantação do Plannera S&OE',[
+      ['S14.1','Análises de comportamento diário da demanda','n','Análise para entender o comportamento diário e semanal da demanda'],
+      ['S14.2','Análises de reabastecimento entre os CDs','n','Análise para verificar o histórico de transferências entre os CDs'],
+      ['S14.3','9º Grupo de Trabalho — Análises de S&OE','c','Grupo de trabalho para apresentar as análises de S&OE'],
+    ],'7. Mapeamento S&OE'],
+
+    // ─── Semana 15 · 11/set ───────────────────────────────────────────────
+    [15,'6.1. Desenho To Be S&OP',[
+      ['S15.1','Desenho de Pessoas: Estrutura organizacional','c','Desenho da estrutura organizacional proposta'],
+      ['S15.2','Desenho de Pessoas: Papéis e Responsabilidades','c','Desenho dos papéis e responsabilidades propostos'],
+      ['S15.3','Desenho do Mapa de Tecnologias','c','Mapeamento das tecnologias e integrações propostas'],
+      ['S15.4','2º Follow Up — Construção S&OP','c','Reunião com o time de projeto do cliente para validações do processo to be'],
+    ],'6. Construção S&OP'],
+
+    // ─── Semana 16 · 18/set ───────────────────────────────────────────────
+    [16,'7.1. Implantação do Plannera S&OE',[
+      ['S16.1','Realizar back test na ferramenta de S&OE para cenários de reabastecimento','i','Testar cenários de reabastecimento no back test da ferramenta de S&OE'],
+      ['S16.2','Comparar resultado da ferramenta com realizado histórico','i','Comparar os resultados da ferramenta com o histórico real de reabastecimentos'],
+      ['S16.3','10º Grupo de Trabalho — Testes de Reabastecimento','i','Grupo de trabalho para apresentar e validar os testes de reabastecimento'],
+    ],'7. Mapeamento S&OE'],
+
+    // ─── Semana 17 · 25/set ───────────────────────────────────────────────
+    [17,'8.1. Operação Assistida S&OE',[
+      ['S17.1','Go Live do módulo do S&OE','i','Fazer o Go Live da Ferramenta S&OE'],
+      ['S17.2','Sessão Prática — DRP e Demand Sensing','i','Treinamento focado em DRP e Demand Sensing'],
+    ],'8. Operação S&OE'],
+
+    // ─── Semana 18 · 02/out ───────────────────────────────────────────────
+    [18,'6.1. Desenho To Be S&OP',[
+      ['S18.1','Desenho de Processo: Indicadores','c','Desenho dos indicadores propostos para o processo de S&OP'],
+      ['S18.2','Desenho de Processo: Estrutura e Pauta de Reuniões','c','Desenho da estrutura e pauta das reuniões do ciclo de S&OP'],
+      ['S18.3','3º Follow Up — Construção S&OP','c','Reunião com o time de projeto do cliente para validações do processo to be'],
+    ],'6. Construção S&OP'],
+
+    // ─── Semana 19 · 09/out ───────────────────────────────────────────────
+    [19,'7.2. Avaliação de Maturidade S&OE',[
+      ['S19.1','Aplicar a Avaliação de Maturidade do S&OE','c','Reunião com o cliente para responder a Avaliação de Maturidade do processo de S&OE'],
+      ['S19.2','Montar insights de maturidade S&OE','n','Relatório de maturidade detalhado com insights específicos de negócio'],
+    ],'7. Mapeamento S&OE'],
+
+    // ─── Semana 20 · 16/out ───────────────────────────────────────────────
+    [20,'7.3. Diagnóstico S&OE',[
+      ['S20.1','Montar o material executivo do processo As Is de S&OE','c','Preparar material executivo para apresentação do diagnóstico de S&OE'],
+      ['S20.2','Apresentar relatório de Mapeamento S&OE para o time de trabalho','c','Alinhar com o time de projeto o material que será apresentado para a diretoria'],
+      ['S20.3','Agenda Executiva — Diagnóstico S&OE As Is','c','Reunião executiva para validar o fluxo as is do processo de S&OE'],
+    ],'7. Mapeamento S&OE'],
+
+    // ─── Semana 21 · 23/out ───────────────────────────────────────────────
+    [21,'6.1. Desenho To Be S&OP',[
+      ['S21.1','Montar o material executivo do processo proposto de S&OP','c','Preparar material executivo com o processo to be de S&OP'],
+      ['S21.2','Apresentar o relatório de construção S&OP para o time de trabalho','c','Alinhar com o time de projeto o material da construção de S&OP'],
+      ['S21.3','Agenda Executiva — Processo Proposto de S&OP','c','Reunião executiva para validar o processo proposto de S&OP'],
+    ],'6. Construção S&OP'],
+
+    // ─── Semana 22 · 30/out ───────────────────────────────────────────────
+    [22,'9.1. Desenho To Be S&OE',[
+      ['S22.1','Desenho do calendário semanal do ciclo','c','Definição do calendário semanal do ciclo de S&OE'],
+      ['S22.2','Rotina de DRP','c','Desenho da rotina de DRP proposta'],
+      ['S22.3','1º Follow Up — Construção S&OE','c','Reunião com o time de projeto do cliente para validações da construção do S&OE'],
+    ],'9. Construção S&OE'],
+
+    // ─── Semana 23 · 06/nov ───────────────────────────────────────────────
+    [23,'9.1. Desenho To Be S&OE',[
+      ['S23.1','Mapa de tecnologias e integração','c','Mapeamento das tecnologias e integrações propostas para o S&OE'],
+      ['S23.2','Desenho de Pessoas: Papéis e Responsabilidades','c','Desenho dos papéis e responsabilidades propostos para o S&OE'],
+      ['S23.3','2º Follow Up — Construção S&OE','c','Reunião com o time de projeto do cliente para validações da construção do S&OE'],
+    ],'9. Construção S&OE'],
+
+    // ─── Semana 24 · 13/nov ───────────────────────────────────────────────
+    [24,'9.1. Desenho To Be S&OE',[
+      ['S24.1','Desenho de Processo: Indicadores','c','Desenho dos indicadores propostos para o processo de S&OE'],
+      ['S24.2','Desenho de Processo: Estrutura e Pauta de Reuniões','c','Desenho da estrutura e pauta das reuniões do ciclo de S&OE'],
+      ['S24.3','3º Follow Up — Construção S&OE','c','Reunião com o time de projeto do cliente para validações da construção do S&OE'],
+    ],'9. Construção S&OE'],
+
+    // ─── Semana 25 · 20/nov ───────────────────────────────────────────────
+    [25,'9.1. Desenho To Be S&OE',[
+      ['S25.1','Montar o material executivo do processo proposto de S&OE','c','Preparar material executivo com o processo to be de S&OE'],
+      ['S25.2','Apresentar o relatório de construção S&OE para o time de trabalho','c','Alinhar com o time de projeto o material da construção de S&OE'],
+      ['S25.3','Agenda Executiva — Processo Proposto de S&OE','c','Reunião executiva para validar o processo proposto de S&OE'],
+    ],'9. Construção S&OE'],
+
+    // ─── Semana 26 · 27/nov ───────────────────────────────────────────────
+    [26,'10. Formalização do Handover',[
+      ['S26.1','Handover para CS','c','Passagem de bastão para área de Customer Success'],
+    ],'10. Handover para CS'],
   ]
 };
 
@@ -518,63 +537,35 @@ const ALL_DATA = {
 const ICHECK = `<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const IBOLT  = `<svg width="9" height="11" viewBox="0 0 9 11" fill="none"><path d="M5.5 1L1 6.5h3.5L3 10l5.5-5.5H5L5.5 1z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const ICHEV  = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4.5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const ICOPY  = `<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M1 9V2a1 1 0 011-1h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
-const IEXT   = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 1H11v3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 1L5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
 
 // ── State ─────────────────────────────────────────────────────────────────────
-let currentTab    = 'essential';
-let currentPacote = 'all';
-const STORE_PREFIX = 'silvia_v1_';
+let currentTab = 'advanced';
+const STORE_KEY = 'jce_advanced_v1';
 
-function getStore(tab){ try{return new Set(JSON.parse(localStorage.getItem(STORE_PREFIX+tab)||'[]'));}catch{return new Set();} }
-function saveStore(tab, s){ try{localStorage.setItem(STORE_PREFIX+tab, JSON.stringify([...s]));}catch{} }
+function getStore(){ try{return new Set(JSON.parse(localStorage.getItem(STORE_KEY)||'[]'));}catch{return new Set();} }
+function saveStore(s){ try{localStorage.setItem(STORE_KEY, JSON.stringify([...s]));}catch{} }
 
-// Per-tab done sets (loaded on demand)
-const doneSets = {};
-function getDoneSet(tab){
-  if(!doneSets[tab]) doneSets[tab] = getStore(tab);
-  return doneSets[tab];
-}
+let doneSet = getStore();
 
 // ── Badge helpers ─────────────────────────────────────────────────────────────
 function badge(rc){
-  // Em modo Pura, atividades de Consultoria passam para Implantação
-  const isPura = currentPacote === 'pura';
   if(rc==='n') return `<span class="rbadge rb-n">${IBOLT} SILVIA</span>`;
-  if(rc==='c') return isPura
-    ? `<span class="rbadge rb-i">Implantação</span>`
-    : `<span class="rbadge rb-c">Consultoria</span>`;
+  if(rc==='c') return `<span class="rbadge rb-c">Consultoria</span>`;
   if(rc==='i') return `<span class="rbadge rb-i">Implantação</span>`;
-  if(rc==='ci') return isPura
-    ? `<span class="rbadge rb-i">Implantação</span>`
-    : `<span class="rbadge rb-ci">Consultoria + Impl.</span>`;
   return '';
-}
-
-// ── Filtered rows helper ──────────────────────────────────────────────────────
-function isVisible(pacote){
-  if(currentPacote === 'all') return true;
-  if(currentPacote === 'pura') return pacote === 'b';
-  return true;
 }
 
 // ── Stats update ──────────────────────────────────────────────────────────────
 function updateStats(){
   const data = ALL_DATA[currentTab] || [];
-  const doneSet = getDoneSet(currentTab);
-  const isPura = currentPacote === 'pura';
   let total=0,nCnt=0,cCnt=0,iCnt=0,doneCnt=0;
-
   data.forEach(g => g[2].forEach(a => {
-    if(!isVisible(a[5])) return;
     total++;
     if(a[2]==='n') nCnt++;
-    else if(isPura) iCnt++;  // no modo Pura tudo que não é Silvia vai para Implantação
-    else if(a[2]==='c'||a[2]==='ci') cCnt++;
+    else if(a[2]==='c') cCnt++;
     else if(a[2]==='i') iCnt++;
     if(doneSet.has(a[0])) doneCnt++;
   }));
-
   document.getElementById('cnt-total').textContent = total;
   document.getElementById('cnt-n').textContent = nCnt;
   document.getElementById('cnt-c').textContent = cCnt;
@@ -585,37 +576,31 @@ function updateStats(){
   if(fill) fill.style.width = total ? Math.round(doneCnt/total*100)+'%' : '0%';
 }
 
-// ── Render tab ────────────────────────────────────────────────────────────────
+// ── Render ────────────────────────────────────────────────────────────────────
 function renderTab(tabId){
   const root = document.getElementById('phases-root');
   root.innerHTML = '';
 
   const data   = ALL_DATA[tabId];
   const phases = PHASES[tabId];
-  if(!data || !phases){ root.innerHTML = '<div style="padding:60px;text-align:center;color:var(--txt3);font-size:14px;">Este projeto ainda não possui atividades cadastradas.</div>'; return; }
+  if(!data || !phases) return;
 
-  const doneSet = getDoneSet(tabId);
-
-  // Group data by phase
+  // Group data by phase (weekId)
   const phGrp = {};
   data.forEach(g => { (phGrp[g[0]] || (phGrp[g[0]]=[])).push(g); });
 
-  phases.forEach((ph, pi) => {
+  phases.forEach(ph => {
     const groups = phGrp[ph.id] || [];
     if(!groups.length) return;
 
     const sec = document.createElement('div');
     sec.className = 'phase-sec';
 
-    // Count for pills (considering pacote filter)
-    const isPura = currentPacote === 'pura';
-    let total=0, nCnt=0, cCnt=0, iCnt=0;
+    let total=0,nCnt=0,cCnt=0,iCnt=0;
     groups.forEach(g => g[2].forEach(a => {
-      if(!isVisible(a[5])) return;
       total++;
       if(a[2]==='n') nCnt++;
-      else if(isPura) iCnt++;
-      else if(a[2]==='c'||a[2]==='ci') cCnt++;
+      else if(a[2]==='c') cCnt++;
       else if(a[2]==='i') iCnt++;
     }));
 
@@ -623,7 +608,7 @@ function renderTab(tabId){
     hdr.className = 'ph-hdr';
     hdr.innerHTML = `
       <div class="ph-bar" style="background:${ph.color}"></div>
-      <div class="ph-title">${ph.id}. ${ph.name}</div>
+      <div class="ph-title">${ph.name} <span class="ph-date">${ph.date}</span></div>
       <div class="ph-pills">
         <span class="pill pill-t">${total} ativ.</span>
         ${nCnt?`<span class="pill pill-n">${nCnt} Silvia</span>`:''}
@@ -648,7 +633,6 @@ function renderTab(tabId){
       <div class="th">Recurso</div>
       <div class="th">Descrição</div>
       <div class="th"></div>
-      <div class="th" style="justify-content:center">Horas Prog.</div>
     `;
     inner.appendChild(colHead);
 
@@ -661,23 +645,27 @@ function renderTab(tabId){
       const dg = document.createElement('div');
       dg.className = 'dg';
 
+      const etapaNome = g[3] || '';
+      const etapaColor = ETAPA_COLORS[etapaNome] || ph.color;
+      const etapaR = `rgba(${hexToRgb(etapaColor)},0.12)`;
+
       const dghdr = document.createElement('div');
       dghdr.className = 'dg-hdr';
-      dghdr.style.borderLeftColor = ph.color;
-      dghdr.textContent = g[1];
+      dghdr.style.borderLeftColor = etapaColor;
+      dghdr.innerHTML = `
+        <span class="dg-entregavel">${g[1]}</span>
+        <span class="dg-etapa-badge" style="background:${etapaR};color:${etapaColor};border:1px solid rgba(${hexToRgb(etapaColor)},0.25);">${etapaNome}</span>
+      `;
       dg.appendChild(dghdr);
 
       g[2].forEach(act => {
-        const [id, name, rc, desc, sk, pk] = act;
+        const [id, name, rc, desc] = act;
         const isNera = rc === 'n';
         const wasDone = doneSet.has(id);
-        const visible = isVisible(pk);
 
         const row = document.createElement('div');
-        row.className = 'act-row'+(isNera?' nera-row':'')+(wasDone?' done-row':'')+(visible?'':' hidden-row');
-        row.dataset.pacote = pk;
+        row.className = 'act-row'+(isNera?' nera-row':'')+(wasDone?' done-row':'');
 
-        // Checkbox
         const cellChk = document.createElement('div');
         cellChk.className = 'cell-chk';
         const chk = document.createElement('div');
@@ -688,52 +676,31 @@ function renderTab(tabId){
           chk.innerHTML = done ? ICHECK : '';
           row.classList.toggle('done-row', done);
           if(done) doneSet.add(id); else doneSet.delete(id);
-          saveStore(currentTab, doneSet);
+          saveStore(doneSet);
           updateStats();
-          const btn = row.querySelector('.btn-ativar');
-          if(btn) btn.disabled = done;
         });
         cellChk.appendChild(chk);
 
-        // ID
         const cellId = document.createElement('div');
         cellId.className = 'cell-id';
         cellId.innerHTML = `<span class="act-id">${id}</span>`;
 
-        // Name + optional pacote tag
         const cellName = document.createElement('div');
         cellName.className = 'cell-name';
-        const pkTag = pk === 'c' ? `<span class="pk-tag">só consultiva</span>` : '';
-        cellName.innerHTML = `<span class="act-name${isNera?' nera':''}">${name}</span>${pkTag}`;
+        cellName.innerHTML = `<span class="act-name${isNera?' nera':''}">${name}</span>`;
 
-        // Recurso
         const cellRec = document.createElement('div');
         cellRec.className = 'cell-rec';
         cellRec.innerHTML = badge(rc);
 
-        // Desc
         const cellDesc = document.createElement('div');
         cellDesc.className = 'cell-desc';
         cellDesc.innerHTML = desc ? `<span class="act-desc" title="${desc}">${desc}</span>` : '';
 
-        // Action
         const cellAct = document.createElement('div');
         cellAct.className = 'cell-act';
-        if(isNera && sk){
-          const btn = document.createElement('button');
-          btn.className = 'btn-ativar';
-          btn.innerHTML = IBOLT + ' Ativar';
-          btn.disabled = wasDone;
-          btn.addEventListener('click', e => { e.stopPropagation(); openDrawer(id, name, sk, desc); });
-          cellAct.appendChild(btn);
-        }
 
-        // Horas
-        const cellHrs = document.createElement('div');
-        cellHrs.className = 'cell-hrs';
-        cellHrs.innerHTML = `<div class="hrs-empty"></div>`;
-
-        row.append(cellChk, cellId, cellName, cellRec, cellDesc, cellAct, cellHrs);
+        row.append(cellChk, cellId, cellName, cellRec, cellDesc, cellAct);
         dg.appendChild(row);
       });
 
@@ -746,23 +713,10 @@ function renderTab(tabId){
   });
 }
 
-// ── Apply pacote filter ───────────────────────────────────────────────────────
-function applyPacoteFilter(){
-  document.querySelectorAll('.act-row').forEach(row => {
-    const pk = row.dataset.pacote;
-    row.classList.toggle('hidden-row', !isVisible(pk));
-  });
-}
-
-function setPacote(p){
-  currentPacote = p;
-  document.getElementById('filt-all').classList.toggle('active', p==='all');
-  document.getElementById('filt-pura').classList.toggle('active', p==='pura');
-  applyPacoteFilter();
-  updateStats();
-  // Refresh phase pills
-  renderTab(currentTab);
-  updateStats();
+// ── Hex to RGB helper ─────────────────────────────────────────────────────────
+function hexToRgb(hex){
+  const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return r ? `${parseInt(r[1],16)},${parseInt(r[2],16)},${parseInt(r[3],16)}` : '0,0,0';
 }
 
 // ── Build tabs ────────────────────────────────────────────────────────────────
@@ -771,17 +725,8 @@ function buildTabs(){
   tabsRoot.innerHTML = '';
   TABS.forEach(t => {
     const btn = document.createElement('button');
-    btn.className = 'tab'+(t.id===currentTab?' active':'')+(t.active?'':' locked');
-    btn.innerHTML = `<div class="tdot" style="background:${t.id===currentTab||t.active?t.color:'#ccc'}"></div>${t.label}`;
-    if(t.active){
-      btn.addEventListener('click', () => {
-        if(currentTab===t.id) return;
-        currentTab = t.id;
-        buildTabs();
-        renderTab(currentTab);
-        updateStats();
-      });
-    }
+    btn.className = 'tab active';
+    btn.innerHTML = `<div class="tdot" style="background:${t.color}"></div>${t.label}`;
     tabsRoot.appendChild(btn);
   });
 }
@@ -789,59 +734,21 @@ function buildTabs(){
 // ── Drawer ────────────────────────────────────────────────────────────────────
 const overlay = document.getElementById('overlay');
 const drawer  = document.getElementById('drawer');
-const dbody   = document.getElementById('drawer-body');
-
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function openDrawer(id, name, sk, desc){
-  const prompt = `Silvia, vou iniciar a atividade ${id} — ${name}.\n\nSkill: ${SKILLS[sk]}\n\n${PROMPTS[sk]}\n\nAnexe o arquivo a esta mensagem e confirme para eu começar.`;
-  dbody.innerHTML = `
-    <div class="d-tag">${IBOLT} ${SKILLS[sk]}</div>
-    <div class="d-title">${esc(name)}</div>
-    <div class="d-id">Atividade ${esc(id)}</div>
-    ${desc ? `<div class="d-instr">${esc(desc)}</div>` : ''}
-    <div class="d-plbl">Prompt para a Silvia</div>
-    <div class="d-prompt">${esc(prompt)}</div>
-    <div class="d-acts">
-      <button class="btn-pr" id="btn-cp">${ICOPY} Copiar prompt</button>
-      <a class="btn-se" href="https://teams.microsoft.com" target="_blank" rel="noopener">${IEXT} Abrir Teams</a>
-      <span class="cpok" id="cpok">${ICHECK} Copiado!</span>
-    </div>
-  `;
-  document.getElementById('btn-cp').addEventListener('click', () => {
-    navigator.clipboard.writeText(prompt).then(() => {
-      const el = document.getElementById('cpok');
-      el.style.display='flex';
-      setTimeout(()=>el.style.display='none',3000);
-    });
-  });
-  overlay.classList.add('open');
-  drawer.classList.add('open');
-}
-
-function closeDrawer(){
+overlay.addEventListener('click', () => {
   overlay.classList.remove('open');
   drawer.classList.remove('open');
-}
-overlay.addEventListener('click', closeDrawer);
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeDrawer(); });
-
-// ── Align stats-left width to "Mini Diagnóstico" tab left edge ───────────────
-function alignStats(){
-  const tabs = document.querySelectorAll('#tabs-root .tab');
-  const miniTab = Array.from(tabs).find(t => t.textContent.trim().startsWith('Mini'));
-  const statsLeft = document.getElementById('stats-left');
-  if(!miniTab || !statsLeft) return;
-  const x = miniTab.getBoundingClientRect().left;
-  statsLeft.style.width = x + 'px';
-}
+});
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape'){
+    overlay.classList.remove('open');
+    drawer.classList.remove('open');
+  }
+});
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 buildTabs();
 renderTab(currentTab);
 updateStats();
-requestAnimationFrame(alignStats);
-window.addEventListener('resize', alignStats);
 </script>
 </body>
 </html>
