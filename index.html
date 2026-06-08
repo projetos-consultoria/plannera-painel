@@ -227,17 +227,16 @@ body{font-family:'Outfit',-apple-system,sans-serif;background:var(--bg);min-heig
 <script>
 // ── Etapa colors ──────────────────────────────────────────────────────────────
 const ETAPA_COLORS = {
-  '0. Pré projeto':           '#2ba09d',
-  '1. Mapeamento Demanda':    '#3a4c8a',
-  '2. Mapeamento Estoques':   '#7c5cbf',
-  '3. Diagnóstico S&OP As Is':'#f7941e',
-  '4. Operação Demanda':      '#d85d4b',
-  '5. Operação Estoques':     '#5C5B5B',
-  '6. Construção S&OP':       '#e07b39',
-  '7. Mapeamento S&OE':       '#2D3558',
-  '8. Operação S&OE':         '#3a4c8a',
-  '9. Construção S&OE':       '#2ba09d',
-  '10. Handover para CS':     '#2D3558',
+  '0. Pré projeto':              '#2ba09d',
+  '1. Mapeamento Demanda':       '#3a4c8a',
+  '2. Mapeamento Estoques':      '#7c5cbf',
+  '3. Diagnóstico S&OP As Is':   '#f7941e',
+  '4. Construção S&OP':          '#e07b39',
+  '5. Operação S&OP':            '#d85d4b',
+  '6. Mapeamento S&OE':          '#2D3558',
+  '7. Construção S&OE':          '#e07b39',
+  '8. Operação S&OE':            '#d85d4b',
+  '10. Handover para CS':        '#5C5B5B',
 };
 
 // ── Tabs ──────────────────────────────────────────────────────────────────────
@@ -248,32 +247,26 @@ const TABS = [
 // ── Phases (Semanas) ──────────────────────────────────────────────────────────
 const PHASES = {
   advanced: [
-    {id:1,  name:'Semana 1',  date:'05/jun', color:'#2ba09d'},
-    {id:2,  name:'Semana 2',  date:'12/jun', color:'#2ba09d'},
-    {id:3,  name:'Semana 3',  date:'19/jun', color:'#3a4c8a'},
-    {id:4,  name:'Semana 4',  date:'26/jun', color:'#3a4c8a'},
-    {id:5,  name:'Semana 5',  date:'03/jul', color:'#3a4c8a'},
-    {id:6,  name:'Semana 6',  date:'10/jul', color:'#3a4c8a'},
-    {id:7,  name:'Semana 7',  date:'17/jul', color:'#3a4c8a'},
-    {id:8,  name:'Semana 8',  date:'24/jul', color:'#7c5cbf'},
-    {id:9,  name:'Semana 9',  date:'31/jul', color:'#7c5cbf'},
-    {id:10, name:'Semana 10', date:'07/ago', color:'#f7941e'},
-    {id:11, name:'Semana 11', date:'14/ago', color:'#d85d4b'},
-    {id:12, name:'Semana 12', date:'21/ago', color:'#e07b39'},
-    {id:13, name:'Semana 13', date:'28/ago', color:'#2D3558'},
-    {id:14, name:'Semana 14', date:'04/set', color:'#2D3558'},
-    {id:15, name:'Semana 15', date:'11/set', color:'#e07b39'},
-    {id:16, name:'Semana 16', date:'18/set', color:'#2D3558'},
-    {id:17, name:'Semana 17', date:'25/set', color:'#5C5B5B'},
-    {id:18, name:'Semana 18', date:'02/out', color:'#e07b39'},
-    {id:19, name:'Semana 19', date:'09/out', color:'#2D3558'},
-    {id:20, name:'Semana 20', date:'16/out', color:'#2D3558'},
-    {id:21, name:'Semana 21', date:'23/out', color:'#e07b39'},
-    {id:22, name:'Semana 22', date:'30/out', color:'#2ba09d'},
-    {id:23, name:'Semana 23', date:'06/nov', color:'#2ba09d'},
-    {id:24, name:'Semana 24', date:'13/nov', color:'#2ba09d'},
-    {id:25, name:'Semana 25', date:'20/nov', color:'#2ba09d'},
-    {id:26, name:'Semana 26', date:'27/nov', color:'#2D3558'},
+  {id:1, name:'Semana 1', date:'29/mai', color:'#2ba09d'},
+  {id:2, name:'Semana 2', date:'05/jun', color:'#3a4c8a'},
+  {id:3, name:'Semana 3', date:'12/jun', color:'#3a4c8a'},
+  {id:4, name:'Semana 4', date:'19/jun', color:'#3a4c8a'},
+  {id:5, name:'Semana 5', date:'26/jun', color:'#3a4c8a'},
+  {id:6, name:'Semana 6', date:'03/jul', color:'#3a4c8a'},
+  {id:7, name:'Semana 7', date:'10/jul', color:'#3a4c8a'},
+  {id:8, name:'Semana 8', date:'17/jul', color:'#3a4c8a'},
+  {id:9, name:'Semana 9', date:'24/jul', color:'#7c5cbf'},
+  {id:10, name:'Semana 10', date:'31/jul', color:'#7c5cbf'},
+  {id:11, name:'Semana 11', date:'07/ago', color:'#f7941e'},
+  {id:12, name:'Semana 12', date:'14/ago', color:'#e07b39'},
+  {id:13, name:'Semana 13', date:'21/ago', color:'#e07b39'},
+  {id:14, name:'Semana 14', date:'28/ago', color:'#e07b39'},
+  {id:15, name:'Semana 15', date:'04/set', color:'#2D3558'},
+  {id:16, name:'Semana 16', date:'11/set', color:'#d85d4b'},
+  {id:17, name:'Semana 17', date:'18/set', color:'#e07b39'},
+  {id:18, name:'Semana 18', date:'25/set', color:'#e07b39'},
+  {id:24, name:'Semana 24', date:'06/nov', color:'#d85d4b'},
+  {id:26, name:'Semana 26', date:'20/nov', color:'#d85d4b'},
   ]
 };
 
@@ -282,254 +275,44 @@ const PHASES = {
 // activities: [id, name, rc(n/c/i), desc]
 const ALL_DATA = {
   advanced: [
-    // ─── Semana 1 · 05/jun ────────────────────────────────────────────────
-    [1,'0.1. Governança do Projeto',[
-      ['S1.1','Handover de vendas para consultoria','c','Alinhamento interno entre vendas e consultoria + implantação para definir escopo do projeto, principais parametrizações'],
-      ['S1.2','Material do Pré Kick-Off','n','Montar o material de Pré Kick Off'],
-      ['S1.3','Validar o material','c','Ajustar e validar o material de Pré Kick Off'],
-      ['S1.4','Reunião de Pré Kick-Off','c','Alinhamento prévio: dados a serem recebidos, pessoas envolvidas, datas de Kick-Off, GTs e Comitês Diretivos'],
-      ['S1.5','Agendar checkpoints periódicos','c','Agendar agendas com o cliente para tirar dúvidas sobre dados'],
-    ],'0. Pré projeto'],
-    [1,'0.2. Validação dos Dados — Sell In',[
-      ['S1.6','Enviar requisição de dados de Sell In','c','Enviar o arquivo de requisição de dados para o ponto focal antes do Pré Kick Off'],
-    ],'0. Pré projeto'],
-
-    // ─── Semana 2 · 12/jun ────────────────────────────────────────────────
-    [2,'0.2. Validação dos Dados — Sell In',[
-      ['S2.1','Resolver pendências de Sell In','n','Identificar quais bases não foram enviadas'],
-      ['S2.2','Verificar grandes números de Sell In','n','Fazer uma validação geral dos grandes números enviados'],
-      ['S2.3','Verificar inconsistências de cadastros de Sell In','n','Analisar cadastro de clientes, produtos e histórico de faturamento'],
-    ],'0. Pré projeto'],
-    [2,'1.1. Diagnóstico do Planejamento de Demanda',[
-      ['S2.4','Entender parâmetros atuais de processo','c','Horizonte, Lag, Granularidades'],
-      ['S2.5','Entrevistas com Engenharia','c','Realizar entrevistas com área de Engenharia para entendimento do processo de lançamento de produtos'],
-      ['S2.6','Entrevistas com Comercial/Marketing Aqua Brasil','c','Realizar entrevistas com Comercial/Marketing para entender como colaboram com o S&OP e a gestão de portfólio'],
-      ['S2.7','Entrevistas com Comercial/Marketing Toyama','c','Realizar entrevistas com Comercial/Marketing para entender como colaboram com o S&OP e a gestão de portfólio'],
-      ['S2.8','Entrevistas com MRP/Compras','c','Realizar entrevista com Compras para entender participação ao longo do processo (leadtime, fornecedores, insumos, embalagens)'],
-      ['S2.9','Entrevistas com Planejamento','c','Realizar entrevista com planejamento para entender processos atuais e conexão com S&OP e S&OE'],
-      ['S2.10','Entrevistas com Comercial/Marketing Nordtech','c','Realizar entrevistas com Comercial/Marketing para entender como colaboram com o S&OP e a gestão de portfólio'],
-    ],'1. Mapeamento Demanda'],
-
-    // ─── Semana 3 · 19/jun ────────────────────────────────────────────────
-    [3,'1.1. Diagnóstico do Planejamento de Demanda',[
-      ['S3.1','Entrevistas com as Diretorias','c','Entender com os Diretores as principais dores, gargalos e resultados esperados com o projeto'],
-      ['S3.2','Consolidar entrevistas e reuniões','n','Montar consolidado de todas as agendas e traçar o mapeamento atual do processo de S&OP'],
-      ['S3.3','Go ahead para Kick Off','c','Marco que sinaliza OK das bases e das principais definições de equipe e agendamento de reuniões'],
-      ['S3.4','Material do Kick Off','n','Montar o material do Kick Off'],
-      ['S3.5','Reunião de Kick Off','c','Reunião oficial com objetivos, entregáveis, cronograma e milestones do projeto'],
-    ],'1. Mapeamento Demanda'],
-    [3,'1.2. Avaliação de Maturidade S&OP',[
-      ['S3.6','Aplicar a Avaliação de Maturidade do S&OP','c','Reunião com o cliente para responder a Avaliação de Maturidade do processo de S&OP'],
-      ['S3.7','Montar insights de maturidade','n','Relatório de maturidade detalhado com insights específicos de negócio'],
-    ],'1. Mapeamento Demanda'],
-
-    // ─── Semana 4 · 26/jun ────────────────────────────────────────────────
-    [4,'1.3. Análise da Demanda — Sell In',[
-      ['S4.1','1º Grupo de Trabalho — Conceitual S&OP/IBP','c','Grupo de trabalho para destrinchar os principais conceitos de S&OP e IBP de acordo com a metodologia Plannera'],
-      ['S4.2','Demanda por diversos recortes — Sell In','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
-      ['S4.3','Pareto de produto e clientes','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
-      ['S4.4','Sazonalidade','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
-      ['S4.5','Lançamentos e Descontinuações','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
-      ['S4.6','Gestão do Portfólio','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
-      ['S4.7','Montar material de análises','n','Montar um material consolidado com as análises de demanda'],
-    ],'1. Mapeamento Demanda'],
-
-    // ─── Semana 5 · 03/jul ────────────────────────────────────────────────
-    [5,'1.3. Análise da Demanda — Sell In',[
-      ['S5.1','2º Grupo de Trabalho — Análises de Demanda','c','Grupo de trabalho para apresentar as análises de demanda com insights estratégicos'],
-    ],'1. Mapeamento Demanda'],
-    [5,'1.4. Implantação do Plannera S&OP Demanda',[
-      ['S5.2','Detalhar parâmetros para especificação da ferramenta — Demanda','i','Preencher o formulário de implantação da ferramenta'],
-      ['S5.3','Validar especificação dos parâmetros técnicos da ferramenta — Demanda','i','Validar com o cliente a especificação da ferramenta'],
-      ['S5.4','Definir usuários e escopo da ferramenta','i','Definir com o cliente quem serão os usuários que utilizarão a ferramenta e seus escopos'],
-      ['S5.5','Preparação de dados históricos','n','Preparar dados para subir na ferramenta, garantindo que estejam prontos antes da disponibilização do Plannera S&OP Demanda'],
-    ],'1. Mapeamento Demanda'],
-
-    // ─── Semana 6 · 10/jul ────────────────────────────────────────────────
-    [6,'1.4. Implantação do Plannera S&OP Demanda',[
-      ['S6.1','3º Grupo de Trabalho — Especificação da Ferramenta S&OP Demanda','i','Grupo de trabalho para definir a especificação da ferramenta de S&OP módulo de Demanda'],
-    ],'1. Mapeamento Demanda'],
-    [6,'1.5. Caso Base de Demanda',[
-      ['S6.2','Analisar 12 meses de planos passados','c','Entender o lag do plano, o nível de mensuração, as premissas usadas na geração e o papel de cada área'],
-      ['S6.3','Calcular o FA e Bias para o período','n','Calcular com a nossa metodologia todos os indicadores principais do planejamento da demanda. FVA quando possível'],
-    ],'1. Mapeamento Demanda'],
-
-    // ─── Semana 7 · 17/jul ────────────────────────────────────────────────
-    [7,'1.5. Caso Base de Demanda',[
-      ['S7.1','4º Grupo de Trabalho — Caso Base de Demanda','c','Grupo de trabalho para apresentar o resultado atual do Forecast Accuracy e Bias do cliente'],
-    ],'1. Mapeamento Demanda'],
-    [7,'1.6. Simulação da Estatística',[
-      ['S7.2','Simular as previsões estatísticas em diversos níveis de agregação','i','Rodar as previsões estatísticas em backtest no período de controle, respeitando o lag escolhido para o cliente'],
-      ['S7.3','Definição de Nível de Série de Previsão','c','Apresentar os resultados e sugerir ao cliente um nível ganhador; definir o que será utilizado'],
-      ['S7.4','Comparar Simulação da Estatística e Caso Base','n','Análise para comparar o resultado da estatística com o caso base'],
-    ],'1. Mapeamento Demanda'],
-    [7,'1.7. Análise e Tratamento de Outliers',[
-      ['S7.5','Detecção de Outliers no nível Série de Previsão','n','Análise para detectar outliers'],
-      ['S7.6','Tratamento de Outliers','n','Fazer os ajustes no histórico de faturamento'],
-      ['S7.7','Simular Previsões Estatísticas pós tratamento de Outliers','i','Refazer o back test após tratamento dos outliers'],
-      ['S7.8','Montar nova matriz ABC-XYZ','n','Análise da matriz ABC-XYZ pós tratamento de outliers'],
-    ],'1. Mapeamento Demanda'],
-
-    // ─── Semana 8 · 24/jul ────────────────────────────────────────────────
-    [8,'1.7. Análise e Tratamento de Outliers',[
-      ['S8.1','5º Grupo de Trabalho — Simulação Estatística','c','Grupo de trabalho para apresentar o resultado da simulação estatística vs o caso base'],
-    ],'1. Mapeamento Demanda'],
-    [8,'2.1. Análise Qualitativa da Operação de Estoques',[
-      ['S8.2','Mapeamento da política atual','c','Mapear os principais critérios, parâmetros e ferramentas utilizados na política atual da empresa'],
-      ['S8.3','Mapeamento do Processo de GTE atual','c','Mapear como funciona o processo atual no âmbito da Revisão da Política e do Monitoramento do estoque'],
-      ['S8.4','Preparar material e validar operação de estoques','c','Material que sintetize a operação de estoques atual: áreas, malha logística, política e processo de gestão tática'],
-    ],'2. Mapeamento Estoques'],
-    [8,'2.2. Análise Quantitativa da Operação de Estoques',[
-      ['S8.5','Analisar grandes números de estoque em vários recortes','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
-      ['S8.6','Analisar estoques dos pontos de estoque','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
-      ['S8.7','Analisar giro, cobertura, capital empregado','n','Análises automatizadas, com ajustes de acordo com especificidades do cliente'],
-    ],'2. Mapeamento Estoques'],
-
-    // ─── Semana 9 · 31/jul ────────────────────────────────────────────────
-    [9,'2.3. Implantação do Plannera S&OP Estoques',[
-      ['S9.1','Detalhar parâmetros para especificação da ferramenta — Estoques','i','Preencher o formulário de implantação da ferramenta'],
-      ['S9.2','Validar especificação dos parâmetros técnicos da ferramenta — Estoques','i','Validar com o cliente a especificação da ferramenta'],
-      ['S9.3','Carga de dados pós implantação do módulo de Estoques','i','Cadastros de Política, estoques, centros'],
-      ['S9.4','Validação da carga de dados e homologação final do módulo de Estoques','i','Testes de reabastecimento e validação com o cliente'],
-      ['S9.5','6º Grupo de Trabalho — Análises de Estoques','c','Grupo de trabalho para apresentar o cenário atual dos estoques e fazer a especificação da ferramenta de S&OP módulo de Estoques'],
-    ],'2. Mapeamento Estoques'],
-    [9,'3.1. Análises Quantitativas dos Indicadores Atuais',[
-      ['S9.6','Montar CB de Incerteza','c','Indicadores de Incerteza atual'],
-      ['S9.7','Montar CB de Estoques','c','Indicadores de estoques atual'],
-      ['S9.8','Montar CB de Nível de Serviço','c','Indicadores de nível de serviço atual'],
-      ['S9.9','Montar Pizza da Incerteza','c','Pizza da incerteza com o viés financeiro'],
-    ],'3. Diagnóstico S&OP As Is'],
-
-    // ─── Semana 10 · 07/ago ───────────────────────────────────────────────
-    [10,'3.2. Mapeamento do Processo de S&OP atual',[
-      ['S10.1','Diagnóstico de Pessoas','c','Avaliar estrutura organizacional, perfil e dimensionamento do time e cultura de planejamento'],
-      ['S10.2','Diagnóstico de Tecnologia','c','Mapear ferramentas utilizadas para o planejamento, fontes de dados e necessidades de integração'],
-      ['S10.3','Diagnóstico de Processo','c','Entender parâmetros atuais: horizonte, indicadores, lags, agregação, cronograma, papéis e responsabilidades, reuniões'],
-      ['S10.4','Reunião interna para discussão do diagnóstico do processo S&OP','c','Reunião técnica com equipe para discutir fluxograma preliminar, debater primeiras ideias e gerar insumos para a Construção'],
-      ['S10.5','Montar o material executivo do processo As Is de S&OP','c','Preparar material para reunião da diretoria'],
-      ['S10.6','Apresentar relatório de Mapeamento S&OP para o time de projeto','c','Alinhar com o time de projeto o material que será apresentado para a diretoria'],
-      ['S10.7','Agenda Executiva — Diagnóstico S&OP As Is','c','Reunião executiva para validar o fluxo as is do processo de S&OP'],
-    ],'3. Diagnóstico S&OP As Is'],
-    [10,'4.1. Operação Assistida Demanda',[
-      ['S10.8','Go Live do módulo de Demanda','c','Fazer o Go Live da Ferramenta S&OP módulo de Demanda'],
-    ],'4. Operação Demanda'],
-
-    // ─── Semana 11 · 14/ago ───────────────────────────────────────────────
-    [11,'4.1. Operação Assistida Demanda',[
-      ['S11.1','Sessão Prática — Time de Planejamento','i','Treinamento geral com o stakeholder e o key user da ferramenta'],
-      ['S11.2','Sessão Prática — Temas Complementares','i','Explorar como melhor realizar análises na ferramenta e sanar dúvidas do cliente'],
-      ['S11.3','Sessão Prática dos usuários de colaboração','i','Escopo reduzido de explicação da ferramenta para os usuários colaboradores'],
-    ],'4. Operação Demanda'],
-    [11,'5.1. Operação Assistida Estoques',[
-      ['S11.4','Go Live do módulo de Estoques','c','Fazer o Go Live da Ferramenta S&OP módulo de Estoques'],
-      ['S11.5','Sessão Prática — foco em estoques','i','Treinamento com o key user do módulo de estoques'],
-    ],'5. Operação Estoques'],
-
-    // ─── Semana 12 · 21/ago ───────────────────────────────────────────────
-    [12,'6.1. Desenho To Be S&OP',[
-      ['S12.1','Brainstorming inicial do Processo To-Be','c','Brainstorming inicial interno do Processo To-Be'],
-      ['S12.2','Desenho de Processo: Fluxograma','c','Desenho do fluxograma proposto do processo de S&OP aberto por área'],
-      ['S12.3','Desenho de Processo: Cronograma','c','Desenho do cronograma proposto do processo de S&OP'],
-      ['S12.4','1º Follow Up — Construção S&OP','c','Reunião com o time de projeto do cliente para validações do processo to be'],
-    ],'6. Construção S&OP'],
-    [12,'7.1. Implantação do Plannera S&OE',[
-      ['S12.5','7º Grupo de Trabalho — Conceitual DRP e Demand Sensing','c','Grupo de trabalho para apresentar os conceitos de DRP e Demand Sensing'],
-    ],'7. Mapeamento S&OE'],
-
-    // ─── Semana 13 · 28/ago ───────────────────────────────────────────────
-    [13,'7.1. Implantação do Plannera S&OE',[
-      ['S13.1','Detalhar parâmetros para especificação da ferramenta — S&OE','i','Parâmetros para o DRP rodar: etapas, política de estoque, CDs'],
-      ['S13.2','Validar especificação dos parâmetros técnicos da ferramenta — S&OE','i','Validar com o cliente a especificação da ferramenta'],
-      ['S13.3','8º Grupo de Trabalho — Especificação da Ferramenta de S&OE','i','Grupo de trabalho para apresentar e definir a especificação da ferramenta de S&OE'],
-    ],'7. Mapeamento S&OE'],
-
-    // ─── Semana 14 · 04/set ───────────────────────────────────────────────
-    [14,'7.1. Implantação do Plannera S&OE',[
-      ['S14.1','Análises de comportamento diário da demanda','n','Análise para entender o comportamento diário e semanal da demanda'],
-      ['S14.2','Análises de reabastecimento entre os CDs','n','Análise para verificar o histórico de transferências entre os CDs'],
-      ['S14.3','9º Grupo de Trabalho — Análises de S&OE','c','Grupo de trabalho para apresentar as análises de S&OE'],
-    ],'7. Mapeamento S&OE'],
-
-    // ─── Semana 15 · 11/set ───────────────────────────────────────────────
-    [15,'6.1. Desenho To Be S&OP',[
-      ['S15.1','Desenho de Pessoas: Estrutura organizacional','c','Desenho da estrutura organizacional proposta'],
-      ['S15.2','Desenho de Pessoas: Papéis e Responsabilidades','c','Desenho dos papéis e responsabilidades propostos'],
-      ['S15.3','Desenho do Mapa de Tecnologias','c','Mapeamento das tecnologias e integrações propostas'],
-      ['S15.4','2º Follow Up — Construção S&OP','c','Reunião com o time de projeto do cliente para validações do processo to be'],
-    ],'6. Construção S&OP'],
-
-    // ─── Semana 16 · 18/set ───────────────────────────────────────────────
-    [16,'7.1. Implantação do Plannera S&OE',[
-      ['S16.1','Realizar back test na ferramenta de S&OE para cenários de reabastecimento','i','Testar cenários de reabastecimento no back test da ferramenta de S&OE'],
-      ['S16.2','Comparar resultado da ferramenta com realizado histórico','i','Comparar os resultados da ferramenta com o histórico real de reabastecimentos'],
-      ['S16.3','10º Grupo de Trabalho — Testes de Reabastecimento','i','Grupo de trabalho para apresentar e validar os testes de reabastecimento'],
-    ],'7. Mapeamento S&OE'],
-
-    // ─── Semana 17 · 25/set ───────────────────────────────────────────────
-    [17,'8.1. Operação Assistida S&OE',[
-      ['S17.1','Go Live do módulo do S&OE','i','Fazer o Go Live da Ferramenta S&OE'],
-      ['S17.2','Sessão Prática — DRP e Demand Sensing','i','Treinamento focado em DRP e Demand Sensing'],
-    ],'8. Operação S&OE'],
-
-    // ─── Semana 18 · 02/out ───────────────────────────────────────────────
-    [18,'6.1. Desenho To Be S&OP',[
-      ['S18.1','Desenho de Processo: Indicadores','c','Desenho dos indicadores propostos para o processo de S&OP'],
-      ['S18.2','Desenho de Processo: Estrutura e Pauta de Reuniões','c','Desenho da estrutura e pauta das reuniões do ciclo de S&OP'],
-      ['S18.3','3º Follow Up — Construção S&OP','c','Reunião com o time de projeto do cliente para validações do processo to be'],
-    ],'6. Construção S&OP'],
-
-    // ─── Semana 19 · 09/out ───────────────────────────────────────────────
-    [19,'7.2. Avaliação de Maturidade S&OE',[
-      ['S19.1','Aplicar a Avaliação de Maturidade do S&OE','c','Reunião com o cliente para responder a Avaliação de Maturidade do processo de S&OE'],
-      ['S19.2','Montar insights de maturidade S&OE','n','Relatório de maturidade detalhado com insights específicos de negócio'],
-    ],'7. Mapeamento S&OE'],
-
-    // ─── Semana 20 · 16/out ───────────────────────────────────────────────
-    [20,'7.3. Diagnóstico S&OE',[
-      ['S20.1','Montar o material executivo do processo As Is de S&OE','c','Preparar material executivo para apresentação do diagnóstico de S&OE'],
-      ['S20.2','Apresentar relatório de Mapeamento S&OE para o time de trabalho','c','Alinhar com o time de projeto o material que será apresentado para a diretoria'],
-      ['S20.3','Agenda Executiva — Diagnóstico S&OE As Is','c','Reunião executiva para validar o fluxo as is do processo de S&OE'],
-    ],'7. Mapeamento S&OE'],
-
-    // ─── Semana 21 · 23/out ───────────────────────────────────────────────
-    [21,'6.1. Desenho To Be S&OP',[
-      ['S21.1','Montar o material executivo do processo proposto de S&OP','c','Preparar material executivo com o processo to be de S&OP'],
-      ['S21.2','Apresentar o relatório de construção S&OP para o time de trabalho','c','Alinhar com o time de projeto o material da construção de S&OP'],
-      ['S21.3','Agenda Executiva — Processo Proposto de S&OP','c','Reunião executiva para validar o processo proposto de S&OP'],
-    ],'6. Construção S&OP'],
-
-    // ─── Semana 22 · 30/out ───────────────────────────────────────────────
-    [22,'9.1. Desenho To Be S&OE',[
-      ['S22.1','Desenho do calendário semanal do ciclo','c','Definição do calendário semanal do ciclo de S&OE'],
-      ['S22.2','Rotina de DRP','c','Desenho da rotina de DRP proposta'],
-      ['S22.3','1º Follow Up — Construção S&OE','c','Reunião com o time de projeto do cliente para validações da construção do S&OE'],
-    ],'9. Construção S&OE'],
-
-    // ─── Semana 23 · 06/nov ───────────────────────────────────────────────
-    [23,'9.1. Desenho To Be S&OE',[
-      ['S23.1','Mapa de tecnologias e integração','c','Mapeamento das tecnologias e integrações propostas para o S&OE'],
-      ['S23.2','Desenho de Pessoas: Papéis e Responsabilidades','c','Desenho dos papéis e responsabilidades propostos para o S&OE'],
-      ['S23.3','2º Follow Up — Construção S&OE','c','Reunião com o time de projeto do cliente para validações da construção do S&OE'],
-    ],'9. Construção S&OE'],
-
-    // ─── Semana 24 · 13/nov ───────────────────────────────────────────────
-    [24,'9.1. Desenho To Be S&OE',[
-      ['S24.1','Desenho de Processo: Indicadores','c','Desenho dos indicadores propostos para o processo de S&OE'],
-      ['S24.2','Desenho de Processo: Estrutura e Pauta de Reuniões','c','Desenho da estrutura e pauta das reuniões do ciclo de S&OE'],
-      ['S24.3','3º Follow Up — Construção S&OE','c','Reunião com o time de projeto do cliente para validações da construção do S&OE'],
-    ],'9. Construção S&OE'],
-
-    // ─── Semana 25 · 20/nov ───────────────────────────────────────────────
-    [25,'9.1. Desenho To Be S&OE',[
-      ['S25.1','Montar o material executivo do processo proposto de S&OE','c','Preparar material executivo com o processo to be de S&OE'],
-      ['S25.2','Apresentar o relatório de construção S&OE para o time de trabalho','c','Alinhar com o time de projeto o material da construção de S&OE'],
-      ['S25.3','Agenda Executiva — Processo Proposto de S&OE','c','Reunião executiva para validar o processo proposto de S&OE'],
-    ],'9. Construção S&OE'],
-
-    // ─── Semana 26 · 27/nov ───────────────────────────────────────────────
-    [26,'10. Formalização do Handover',[
-      ['S26.1','Handover para CS','c','Passagem de bastão para área de Customer Success'],
-    ],'10. Handover para CS'],
+  [1, '0.1. Governança do Projeto', [['S1.1','Handover de vendas para consultoria','c','Alinhamento interno entre vendas e consultoria + implantação para definir escopo do projeto, principais parametrizações'],['S1.2','Material do Pré Kick-Off','n','Montar o material de Pré Kick Off'],['S1.3','Validar o material','c','Ajustar e validar o material de Pré Kick Off'],['S1.4','Reunião de Pré Kick - Off','c','Reunião para alinhamento prévio: Dados a serem recebidos, Pessoas envolvidas no projeto, Datas de Kick-Off, GTs e Comitês Diretivos, Oficializar as datas com o cliente e planejamento e deixar claro as consequências de atraso (aditivos, etc)'],['S1.5','Agendar checkpoints periódicos','c','Agendar agendas com o cliente para tirar duvidas sobre dados']], '0. Pré projeto'],
+  [1, '0.2. Validação dos dados - Sell In', [['S1.6','Enviar requisição de dados de Sell In','c','Enviar o arquivo de requisição de dados para o ponto focal antes do pré kick off, com pequenas modificações para a realidade do cliente se necessário.']], '0. Pré projeto'],
+  [2, '0.2. Validação dos dados - Sell In', [['S2.1','Resolver pendências de Sell In','n','Identificar quais bases não foram enviadas'],['S2.2','Verificar grandes números de Sell In','n','Fazer uma validação geral dos grandes números enviados'],['S2.3','Verificar inconsistências de cadastros de Sell In','n','Analisar cadastro de clientes, produtos, histórico de faturamento']], '0. Pré projeto'],
+  [2, '1.1. Diagnóstico do Planejamento de Demanda', [['S2.4','Entender parâmetros atuais de processo','c','Horizonte, Lag, Granularidades'],['S2.5','Entrevistas com Engenharia','c','Realizar entrevistas com área de Engenharia para entedimento do processo de lançamento de produtos'],['S2.6','Entrevistas com Comercial/Marketing Aqua Brasil','c','Realizar entrevistas com Comercial, incluindo diferentes areas que gerenciam familias de produtos, para entender como colaboram com o S&OP, tanto na fase de planejamento de demanda, como na gestão de portfólio que alimenta o S&OP'],['S2.7','Entrevistas com Comercial/Marketing Toyama','c','Realizar entrevistas com Comercial, incluindo diferentes areas que gerenciam familias de produtos, para entender como colaboram com o S&OP, tanto na fase de planejamento de demanda, como na gestão de portfólio que alimenta o S&OP'],['S2.8','Entrevistas com MRP/Compras','c','Realizar entrevista com Compras para entender como é a participação ao longo do processo e quais analises sao realizadas para suportar o processo (leadtime, fornecedores, safra, insumos, embalagens)']], '1. Mapeamento Demanda'],
+  [3, '1.1. Diagnóstico do Planejamento de Demanda', [['S3.1','Entrevistas com Planejamento','c','Realizar entrevista com planejamento para entender como são os processos atuais de forma geral, para conexão com S&OP e S&OE'],['S3.2','Entrevistas com Comercial/Marketing Nordtech','c','Realizar entrevistas com Comercial, incluindo diferentes areas que gerenciam familias de produtos, para entender como colaboram com o S&OP, tanto na fase de planejamento de demanda, como na gestão de portfólio que alimenta o S&OP']], '1. Mapeamento Demanda'],
+  [4, '1.1. Diagnóstico do Planejamento de Demanda', [['S4.1','Entrevistas com as Diretorias','c','Entender com os Diretores envolvidos no processo de S&OP as principais dores, gargalos, os resultados esperados com o projeto, onde podemos ajudar'],['S4.2','Consolidar entrevistas e reuniões','n','Montar consolidado de todas as agendas e traçar o Mapeamento atual do Processo de S&OP'],['S4.3','Go ahead para Kick Off','c','Marco que sinalizar OK das bases de dados e das principais definições de equipe de projeto e agendamento de reunioes, possibilitando inicio do projeto na data de Kick Off prevista.'],['S4.4','Material do Kick Off','n','Montar o Material do Kick Off'],['S4.5','Reunião de Kick Off','c','Reunião para kick-off oficial, com a participação das pessoas definidas anteriormente: objetivos, entregáveis, cronograma, milestones.']], '1. Mapeamento Demanda'],
+  [4, '1.2. Avaliação de Maturidade S&OP', [['S4.6','Aplicar a Avaliação de Maturidade do S&OP','c','Reunião com o cliente para responder a Avaliação de Maturidade do processo de S&OP'],['S4.7','Montar insights de maturidade','n','Relatório de maturiade detalhada com isights específicos de negócio']], '1. Mapeamento Demanda'],
+  [5, '1.3. Análise da Demanda - Sell In', [['S5.1','1º Grupo de Trabalho - Conceitual S&OP/IBP','c','Grupo de trabalho para destrinchar os principais conceitos de S&OP e IBP de acordo com a metodologia Plannera'],['S5.2','Demanda por diversos recortes - Sell In','n','Análises automatizadas, com ajustes de acordo com especificadades do cliente'],['S5.3','Paretto de produto e clientes','n','Análises automatizadas, com ajustes de acordo com especificadades do cliente'],['S5.4','Sazonalidade','n','Análises automatizadas, com ajustes de acordo com especificadades do cliente'],['S5.5','Lançamentos e Descontinuações','n','Análises automatizadas, com ajustes de acordo com especificadades do cliente'],['S5.6','Gestão do Portifólio','n','Análises automatizadas, com ajustes de acordo com especificadades do cliente'],['S5.7','Montar material de análises','n','Montar um material consolidado com as análises']], '1. Mapeamento Demanda'],
+  [6, '1.3. Análise da Demanda - Sell In', [['S6.1','2º Grupo de Trabalho Mapeamento - Análises de Demanda','c','Grupo de trabalho para apresentar as analises de demanda com insights estratégicos']], '1. Mapeamento Demanda'],
+  [6, '1.4.  Implantação do Plannera S&OP Demanda', [['S6.2','Detalhar parâmetros para especificação da ferramenta - Demanda','i','Preencher o formulário de implatanação da ferramenta'],['S6.3','Validar especificação dos parâmetros técnicos da ferramenta - Demanda','i','Validar com o cliente a especificação da ferramenta'],['S6.4','Definir usuários e escopo da ferramenta','i','Definir com o cliente quem serão os usuários que utilizarão a ferramenta e seus escopos'],['S6.5','Preparação de dados Históricos dos últimos meses','n','Preparar dados para subir na ferramenta, garantindo que estejam prontos antes da disponibilização do Plannera S&OP Demanda']], '1. Mapeamento Demanda'],
+  [7, '1.4.  Implantação do Plannera S&OP Demanda', [['S7.1','3º Grupo de Trabalho - Especificação da Ferramenta S&OP Demanda','i','Grupo de Trabalho para definir a especificação da ferramenta de S&OP módulo de Demanda']], '1. Mapeamento Demanda'],
+  [7, '1.5 Caso Base de Demanda', [['S7.2','Analisar 12 meses de planos passados','c','Entender o lag do plano, o nível de mensuração, as premissas usadas na geração, o papel de cada área na criação...'],['S7.3','Calcular o FA e Bias para o período','n','Calcular com a nossa metodologia todos os indicadores principais do planejamento da demanda. Se possível, FVA também!']], '1. Mapeamento Demanda'],
+  [8, '1.5 Caso Base de Demanda', [['S8.1','4º Grupo de Trabalho - Caso Base de Demanda','c','Grupo de trabalho para apresentar o resultado atual do Forecast Accuracy e Bias do cliente']], '1. Mapeamento Demanda'],
+  [8, '1.6. Simulação da Estatística', [['S8.2','Simular as previsões estatísticas em diversos níveis de agregação','i','Rodar as previsões estatísticas em backtest no período de controle (geralmente 12 meses), respeitando o lag escolhido para o cliente.  (sell out se aplicável)'],['S8.3','Definição de Nível de Série de Previsão','c','Apresentar os resultados ( apenas o range de melhora com um ranking). Sugerir ao cliente um nível ganhador e definir o que será utilizado'],['S8.4','Comparar Simulação da Estatística e Caso Base','n','Análise para comparar o resultado da estatística com o caso base']], '1. Mapeamento Demanda'],
+  [8, '1.7. Análise e Tratamento de Outliers', [['S8.5','Detecção de Outliers no nível Série de Previsão','n','Análise para detectar outliers (Sell out se aplicável)'],['S8.6','Tratamento de Outliers','n','Fazer os ajustes no histórico de faturamento'],['S8.7','Simular Previsões Estatísticas pós tratamento de Outliers','i','Refazer o back test após tratamento dos outliers'],['S8.8','Montar nova matriz ABC-XYZ','n','Análise da matriz abc xyz']], '1. Mapeamento Demanda'],
+  [9, '1.7. Análise e Tratamento de Outliers', [['S9.1','5º Grupo de Trabalho - Simulação Estatística','c','Grupo de trabalho para apresentar o resultado da simulação estatística vs o caso base']], '1. Mapeamento Demanda'],
+  [9, '2.1. Analise Qualitativa da Operação de Estoques', [['S9.2','Mapeamento da política atual','c','Mapear os principais criterios, parametros e ferramentas utilizados na política atual da empresa'],['S9.3','Mapeamento do Processo de GTE atual','c','Mapear como funciona o processo atual no ambito da Revisão da Política e do Monitoramento do estoque.'],['S9.4','Preparar material e validar operação de estoques','c','Preparar material que sintetize operação de estoques atual qualitativamente: areas envolvidas, malha logistica, política atual e processo de gestão tática.']], '2. Mapeamento Estoques'],
+  [9, '2.2. Analise Quantitativa da Operação de Estoques', [['S9.5','Analisar grandes números de estoque em vários recortes','n','Análises automatizadas, com ajustes de acordo com especificadades do cliente'],['S9.6','Analisar estoques dos pontos de estoque','n','Análises automatizadas, com ajustes de acordo com especificadades do cliente'],['S9.7','Analisar giro, cobertura, capital empregado','n','Análises automatizadas, com ajustes de acordo com especificadades do cliente']], '2. Mapeamento Estoques'],
+  [10, '2.3. Implantação do Plannera S&OP Estoques', [['S10.1','Detalhar parâmetros para especificação da ferramenta - Estoques','i','Preencher o formulário de implatanação da ferramenta'],['S10.2','Validar especificação dos parâmetros técnicos da ferramenta - Estoques','i','Validar com o cliente a especificação da ferramenta'],['S10.3','Carga de dados pós implantação do módulo de Estoques','i','Cadastros de Política, estoques, centros'],['S10.4','Validação da carga de dados e homologação final do módulo de Estoques','i','Testes de reabastecimento, validação com o cliente'],['S10.5','6º Grupo de Trabalho - Análises de Estoques','c','Grupo de trabalho para apresentar cenário atual dos estoques do cliente e fazer a especificação da ferramenta de S&OP módulo de estoques']], '2. Mapeamento Estoques'],
+  [10, '3.1 Analises Quantitativas do Indicadores Atuais', [['S10.6','Montar CB de Incerteza','c','Indicadores de Incerrteza atual'],['S10.7','Montar CB de Estoques','c','Indicadores de estoques atual'],['S10.8','Montar CB de Nível de Serviço','c','Indicadores de nível de serviço atual'],['S10.9','Montar Pizza da Incerteza','c','Pizza da incerteza com o viés financeiro']], '3. Diagnóstico S&OP As Is'],
+  [11, '3.2 Mapeamento Do Processo de S&OP atual', [['S11.1','Diagnóstico de Pessoas','c','Avaliar estrutura organizacional (área de planejamento está no lugar certo do organograma?), Perfil e dimensionamento do time, e cultura de planejamento'],['S11.2','Diagnóstico de Tecnologia','c','Mapear ferramentas atualmente utilizadas para o planejamento, fontes de dados, e necessidades de integração'],['S11.3','Diagnóstico de Processo','c','entender parâmetros atuais do processo: horizonte, indicadores, lags de medição, níveis de agregação para medição, análise e colaboração, cronograma, papeis e responsabilidades, reuniões (participantes e pautas), tomadas de decisão necessárias'],['S11.4','Reuniao interna para discussao do diagnostico de processo S&OP','c','Realizar reunião técnica com equipe para discutir fluxograma preliminar, levantar principais dúvidas e debater primeiras ideias da Construção para gerar insumos de quais outras informacoes ou analises devem ser geradas na fase de Mapeamento. Realizar brainstorming das Oportunidades que serão apontadas para fase de construção.'],['S11.5','Montar o material executivo do processo As Is de S&OP','c','Preparar material para reunião da diretoria'],['S11.6','Apresentar relatorio de Mapeamento S&OP para o time de projeto','c','Alinhar com o time de projeto o material que será apresentado para  diretoria'],['S11.7','Agenda Executiva - Mapeamento - Diagnóstico S&OP As Is','c','Reunião executiva para validar o fluxo as is to processo de S&OP']], '3. Diagnóstico S&OP As Is'],
+  [12, '4.1 Desenho To Be S&OP', [['S12.1','Brainstorming inicial do Processo To-Be','c','Brainstorming inicial interno do Processo To-Be'],['S12.2','Desenho de Processo: Fluxograma','c','Desenho do fluxograma proposto do processo de S&OP aberto por área'],['S12.3','Desenho de Processo: Cronograma','c','Desenho do cronograma proposto do processo de S&OP'],['S12.4','1º Follow Up - Construção S&OP','c','Reunião com o time de projeto do cliente para validações do processo to be']], '4. Construção S&OP'],
+  [12, '6.1. Implantação do Plannera S&OE', [['S12.5','7º Grupo de Trabalho - Conceitual DRP e Demand Sensing','c','Grupo de trabalho para apresentar os conceitos de DRP e Demand Sensing']], '6. Mapeamento S&OE'],
+  [12, '6.2. Avaliação de Maturidade S&OE', [['S12.6','Aplicar a Avaliação de Maturidade do S&OE','c','Reunião com o cliente para responder a Avaliação de Maturidade do processo de S&OP'],['S12.7','Montar insights de maturidade','n','Relatório de maturiade detalhada com isights específicos de negócio']], '6. Mapeamento S&OE'],
+  [13, '6.1. Implantação do Plannera S&OE', [['S13.1','Detalhar parâmetros para especificação da ferramenta - S&OE','i','Parâmetros para o DRP rodar, etapas, política de estoque, cds'],['S13.2','Validar especificação dos parâmetros técnicos da ferramenta - S&OE','i','Validar com o cliente a especificação da ferramenta'],['S13.3','8º Grupo de Trabalho - Especificação da Ferramenta de S&OE','i','Grupo de trabalho para apresentar a especificação da ferramenta de S&OE']], '6. Mapeamento S&OE'],
+  [13, '4.1 Desenho To Be S&OP', [['S13.4','Desenho de Pessoas: Estrutura organizacional','c','Desenho da estrutura organizacional proposta'],['S13.5','Desenho de Pessoas: Papeis e Responsabilidades','c','Desenho dos papéis e responsabilidades proposta'],['S13.6','Desenho do Mapa dee Tecnologias','c',''],['S13.7','2º Follow Up - Construção S&OP','c','']], '4. Construção S&OP'],
+  [14, '6.1. Implantação do Plannera S&OE', [['S14.1','Analises de reabastecimento entre os CD\'s','n','Análise para verificar o histórico de transferencias entre os Cd\'s'],['S14.2','9º Grupo de Trabalho - Análises de S&OE','c','Grupo de trabalho para arepresentar as análises de S&OE']], '6. Mapeamento S&OE'],
+  [14, '4.1 Desenho To Be S&OP', [['S14.3','Desenho de Processo: Indicadores','c',''],['S14.4','Desenho de Processo: Estrutura e Pauta de Reuniões','c',''],['S14.5','3º Follow Up - Construção S&OP','c','']], '4. Construção S&OP'],
+  [15, '6.1. Implantação do Plannera S&OE', [['S15.1','Realizar back test na ferramenta de S&OE para cenários de reabastecimento','i',''],['S15.2','comparar resultado da ferramenta com realizado histórico','i',''],['S15.3','10º Grupo de Trabalho - Testes de Reabastecimento','i','']], '6. Mapeamento S&OE'],
+  [15, '6.3 Diagnóstico S&OE', [['S15.4','Montar o material executivo do processo As Is de S&OE','c',''],['S15.5','Apresentar relatorio de Mapeamento S&OE para o time de trabalho','c',''],['S15.6','Agenda Executiva - Mapeamento - Diagnóstico S&OE As Is','c','']], '6. Mapeamento S&OE'],
+  [16, '5.1. Operação Assistida S&OP', [['S16.1','Go Live S&OP','c','Fazer o Go Live da Ferramenta S&OP módulo de Demanda'],['S16.2','Sessão Prática Time de Planejamento','i','Treinamento geral com o stakeholder com o key user da ferramenta'],['S16.3','Sessão Prática time de Planejamento: Temas Complementares','i','explorar como melhor realizar análises na ferramenta( Utilização de Dashboards) e/ou as dúvidas do cliente'],['S16.4','Sessão Prática dos usuários de colaboração','i','Momento de trazer um escopo reduzido de explicação da ferramenta para o colaborador'],['S16.5','Sessão Prática time de Planejamento: foco em estoques','i','Treinamento com o key user do módulo de estoques']], '5. Operação S&OP'],
+  [16, '4.1 Desenho To Be S&OP', [['S16.6','Montar o material executivo do proceso proposto de S&OP','c',''],['S16.7','Apresentar o relatório de construção S&OP para o time de trabalho','c',''],['S16.8','Agenda Executiva - Construção  - Processo Proposto de S&OP','c','']], '4. Construção S&OP'],
+  [17, '7.1 Desenho To Be S&OP', [['S17.1','Desenho do calendário semanal do ciclo','c',''],['S17.2','Rotina de DRP','c',''],['S17.3','1º Follow Up - Construção S&OE','c',''],['S17.4','Mapa de tecnologias e integração','c',''],['S17.5','Desenho de Pessoas: Papeis e Responsabilidades','c',''],['S17.6','2º Follow Up - Construção S&OE','c',''],['S17.7','Desenho de Processo: Indicadores','c',''],['S17.8','Desenho de Processo: Estrutura e Pauta de Reuniões','c',''],['S17.9','3º Follow Up - Construção S&OE','c','']], '7. Construção S&OE'],
+  [18, '7.1 Desenho To Be S&OP', [['S18.1','Montar o material executivo do proceso proposto de S&OE','c',''],['S18.2','Apresentar o relatório de construção S&OE para o time de trabalho','c',''],['S18.3','Agenda Executiva - Construção  - Processo Proposto de S&OE','c','']], '7. Construção S&OE'],
+  [18, '8.1 Operação Assistida S&OE', [['S18.4','Go Live do módulo do S&OE','i','']], '8. Operação S&OE'],
+  [24, '5.1. Operação Assistida S&OP', [['S24.1','Fim da Operação Assistida de S&OP','c','Término do acompanhamento do processo novo de S&OP e operação asssitida da ferramenta de S&OP']], '5. Operação S&OP'],
+  [26, '8.1 Operação Assistida S&OE', [['S26.1','Fim da Operação Assistida de S&OE','c','Término do acompanhamento do processo novo de S&OE e operação asssitida da ferramenta de S&OE']], '8. Operação S&OE'],
+  [26, '10. Formalização do Handover', [['S26.2','Handover para CS','c','Passagem de bastão para área de Costumer Success']], '10. Handover para CS'],
   ]
 };
 
@@ -751,4 +534,4 @@ renderTab(currentTab);
 updateStats();
 </script>
 </body>
-</html>
+  </html>
